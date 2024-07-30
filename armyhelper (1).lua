@@ -2,7 +2,7 @@ require("samp-api")
 require("moonloader")
 
 script_name('ArmyHelper')
-script_version("31.07.2024")
+script_version("32.07.2024")
 
 
 
@@ -1057,7 +1057,7 @@ function main()
     
 
 
-    sampAddChatMessage('ArmyHelper: Ãîòîâ ê ðàáîòå. Àêòèâàöèÿ: /ah ffffffffffff', 0xFFFFFFF )
+    sampAddChatMessage('ArmyHelper: Ãîòîâ ê ðàáîòå. Àêòèâàöèÿ: /ah ffsssssssssssssssf', 0xFFFFFFF )
     
 
     
