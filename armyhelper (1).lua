@@ -2,7 +2,7 @@ require("samp-api")
 require("moonloader")
 
 script_name('ArmyHelper')
-script_version("31.07.2024")
+script_version("32.07.2024")
 
 
 
@@ -10,34 +10,34 @@ script_version("31.07.2024")
 local dlstatus = require('moonloader').download_status
 
 function update()
-  local fpath = os.getenv('TEMP') .. '\\testing_version.json' -- ���� ����� �������� ��� ������ ��� ��������� ������
-  downloadUrlToFile('https://raw.githubusercontent.com/coulanderson/Army/main/up.json', fpath, function(id, status, p1, p2) -- ������ �� ��� ������ ��� ���� ������� ������� � ��� � ���� ��� ����� ������ ����
+  local fpath = os.getenv('TEMP') .. '\\testing_version.json' -- êóäà áóäåò êà÷àòüñÿ íàø ôàéëèê äëÿ ñðàâíåíèÿ âåðñèè
+  downloadUrlToFile('https://raw.githubusercontent.com/coulanderson/Army/main/up.json', fpath, function(id, status, p1, p2) -- ññûëêó íà âàø ãèòõàá ãäå åñòü ñòðî÷êè êîòîðûå ÿ ââ¸ë â òåìå èëè ëþáîé äðóãîé ñàéò
     if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-    local f = io.open(fpath, 'r') -- ��������� ����
+    local f = io.open(fpath, 'r') -- îòêðûâàåò ôàéë
     if f then
-      local info = decodeJson(f:read('*a')) -- ������
+      local info = decodeJson(f:read('*a')) -- ÷èòàåò
       updatelink = info.updateurl
       if info and info.latest then
-        version = tonumber(info.latest) -- ��������� ������ � �����
-        if version > tonumber(thisScript().version) then -- ���� ������ ������ ��� ������ ������������� ��...
-          lua_thread.create(goupdate) -- ������
-        else -- ���� ������, ��
-          update = false -- �� ��� ����������
-          sampAddChatMessage(('[Testing]: � ��� � ��� ��������� ������! ���������� ��������'), color)
+        version = tonumber(info.latest) -- ïåðåâîäèò âåðñèþ â ÷èñëî
+        if version > tonumber(thisScript().version) then -- åñëè âåðñèÿ áîëüøå ÷åì âåðñèÿ óñòàíîâëåííàÿ òî...
+          lua_thread.create(goupdate) -- àïäåéò
+        else -- åñëè ìåíüøå, òî
+          update = false -- íå äà¸ì îáíîâèòüñÿ
+          sampAddChatMessage(('[Testing]: Ó âàñ è òàê ïîñëåäíÿÿ âåðñèÿ! Îáíîâëåíèå îòìåíåíî'), color)
         end
       end
     end
   end
 end)
 end
---���������� ���������� ������
+--ñêà÷èâàíèå àêòóàëüíîé âåðñèè
 function goupdate()
-sampAddChatMessage(('[Testing]: ���������� ����������. AutoReload ����� �������������. ����������...'), color)
-sampAddChatMessage(('[Testing]: ������� ������: '..thisScript().version..". ����� ������: "..version), color)
+sampAddChatMessage(('[Testing]: Îáíàðóæåíî îáíîâëåíèå. AutoReload ìîæåò êîíôëèêòîâàòü. Îáíîâëÿþñü...'), color)
+sampAddChatMessage(('[Testing]: Òåêóùàÿ âåðñèÿ: '..thisScript().version..". Íîâàÿ âåðñèÿ: "..version), color)
 wait(300)
-downloadUrlToFile(updatelink, thisScript().path, function(id3, status1, p13, p23) -- ������ ��� ������ � latest version
+downloadUrlToFile(updatelink, thisScript().path, function(id3, status1, p13, p23) -- êà÷àåò âàø ôàéëèê ñ latest version
   if status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
-  sampAddChatMessage(('[Testing]: ���������� ���������!'), color)
+  sampAddChatMessage(('[Testing]: Îáíîâëåíèå çàâåðøåíî!'), color)
   thisScript():reload()
 end
 end)
@@ -217,55 +217,55 @@ local cmd = new.char[256](settings.binder.bindercmd)
 local autoClist = new.bool(settings.nigger.autoClist)
 local sclad = new.char[256](u8(settings.nigger.sost))
 
---------------------------------ÃËÀÂÍÎÅ ÌÅÍÞ---------------------------
+--------------------------------ÃƒÃ‹Ã€Ã‚ÃÃŽÃ… ÃŒÃ…ÃÃž---------------------------
 imgui.OnFrame(function() return windows[0] end, function (player)
     imgui.SetNextWindowPos(imgui.ImVec2(500,500), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(245, 270), imgui.Cond.Always)
     imgui.Begin('ArmyHelper', windows, imgui.WindowFlags.NoResize)
-    if imgui.Button(u8'Îñíîâíîå',imgui.ImVec2(240,24)) then
+    if imgui.Button(u8'ÃŽÃ±Ã­Ã®Ã¢Ã­Ã®Ã¥',imgui.ImVec2(240,24)) then
         windows[0] = false
         blyat[0] = true
     end
-    if imgui.Button(u8'Áèíäåð',imgui.ImVec2(240,24)) then  
+    if imgui.Button(u8'ÃÃ¨Ã­Ã¤Ã¥Ã°',imgui.ImVec2(240,24)) then  
         windows[0] = false
         show_window[0] = true
 
     end
-    if imgui.Button(u8'ÀâòîÁÏ',imgui.ImVec2(240,24)) then  
+    if imgui.Button(u8'Ã€Ã¢Ã²Ã®ÃÃ',imgui.ImVec2(240,24)) then  
         windows[0] = false
         xxx.bool[0] = true
 
     end
-    if imgui.Button(u8'Ïîñòàâêè',imgui.ImVec2(240,24)) then
+    if imgui.Button(u8'ÃÃ®Ã±Ã²Ã Ã¢ÃªÃ¨',imgui.ImVec2(240,24)) then
         windows[0] = false
         her[0] = true
     end
-    if imgui.Button(u8'Èíôîðìàöèÿ',imgui.ImVec2(240,24)) then
+    if imgui.Button(u8'ÃˆÃ­Ã´Ã®Ã°Ã¬Ã Ã¶Ã¨Ã¿',imgui.ImVec2(240,24)) then
         windows[0] = false
         pizda[0] = true
     end
     imgui.End()
 end)
 
-------------------------------ÎÑÍÎÂÍÎÅ---------------------------------
+------------------------------ÃŽÃ‘ÃÃŽÃ‚ÃÃŽÃ…---------------------------------
 imgui.OnFrame(function() return blyat[0] end, function (player)
     imgui.SetNextWindowPos(imgui.ImVec2(500,500), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(245, 270), imgui.Cond.Always)
-    imgui.Begin(u8'Îñíîâíîå', blyat, imgui.WindowFlags.NoResize)
-    imgui.Text(u8'Ââåäèòå òåã:')
+    imgui.Begin(u8'ÃŽÃ±Ã­Ã®Ã¢Ã­Ã®Ã¥', blyat, imgui.WindowFlags.NoResize)
+    imgui.Text(u8'Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã²Ã¥Ã£:')
     
     if imgui.InputText('##Add', inputt, 256) then
         settings.nigger.inputsaved = u8:decode(str(inputt)) 
         inicfg.save(settings, 'ArmyHelper.ini') 
     end
-    imgui.Text(u8'Ââåäèòå êëèñò:')
+    imgui.Text(u8'Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ ÃªÃ«Ã¨Ã±Ã²:')
     
     if imgui.InputText('##qwerty', cl, 256) then
         settings.nigger.clist = u8:decode(str(cl))
         inicfg.save(settings, 'ArmyHelper.ini')
     end
     
-    if imgui.Checkbox(u8'Öâåòíûå íèêè â ÷àòå', checkboxone) then
+    if imgui.Checkbox(u8'Ã–Ã¢Ã¥Ã²Ã­Ã»Ã¥ Ã­Ã¨ÃªÃ¨ Ã¢ Ã·Ã Ã²Ã¥', checkboxone) then
         settings.nigger.checkboxstatus = checkboxone[0] 
         inicfg.save(settings, 'ArmyHelper.ini')
     end
@@ -279,18 +279,18 @@ imgui.OnFrame(function() return blyat[0] end, function (player)
     imgui.TextDisabled("(?)")
     if imgui.IsItemHovered() then
         imgui.BeginTooltip()
-        imgui.Text(u8'Áëîêèðóåò ðåêëàìó â ÷àòå')
+        imgui.Text(u8'ÃÃ«Ã®ÃªÃ¨Ã°Ã³Ã¥Ã² Ã°Ã¥ÃªÃ«Ã Ã¬Ã³ Ã¢ Ã·Ã Ã²Ã¥')
         imgui.EndTooltip()
     end
-    if imgui.Checkbox(u8'Áëîêèðîâêà Àäìèí×àòà', admin) then
+    if imgui.Checkbox(u8'ÃÃ«Ã®ÃªÃ¨Ã°Ã®Ã¢ÃªÃ  Ã€Ã¤Ã¬Ã¨Ã­Ã—Ã Ã²Ã ', admin) then
         settings.nigger.adminchat = admin[0] 
         inicfg.save(settings, 'ArmyHelper.ini')
     end
-    if imgui.Checkbox(u8'Áëîêèðîâêà íîâîñòåé', qqq) then
+    if imgui.Checkbox(u8'ÃÃ«Ã®ÃªÃ¨Ã°Ã®Ã¢ÃªÃ  Ã­Ã®Ã¢Ã®Ã±Ã²Ã¥Ã©', qqq) then
         settings.nigger.nov = qqq[0] 
         inicfg.save(settings, 'ArmyHelper.ini')
     end
-    if imgui.Button(u8'Âåðíóòüñÿ â ãëàâíîå ìåíþ',imgui.ImVec2(240,24)) then  
+    if imgui.Button(u8'Ã‚Ã¥Ã°Ã­Ã³Ã²Ã¼Ã±Ã¿ Ã¢ Ã£Ã«Ã Ã¢Ã­Ã®Ã¥ Ã¬Ã¥Ã­Ã¾',imgui.ImVec2(240,24)) then  
         windows[0] = true
         blyat[0] = false
 
@@ -301,13 +301,13 @@ imgui.OnFrame(function() return blyat[0] end, function (player)
 
 end)
 
------------------------------ÀÂÒÎÁÏ------------------------------------
+-----------------------------Ã€Ã‚Ã’ÃŽÃÃ------------------------------------
 imgui.OnFrame(function() return xxx.bool[0] end, function()
     local screen = {getScreenResolution()}
     imgui.SetNextWindowPos(imgui.ImVec2(screen[1] / 2, screen[2] / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(250, 250), imgui.Cond.FirstUseEver)
-    imgui.Begin(u8"ÀâòîÁÏ", xxx.bool, imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoResize + imgui.WindowFlags.NoSavedSettings)
-    if imgui.Checkbox(u8"Âêëþ÷èòü/âûêëþ÷èòü", xxx.mainState) then
+    imgui.Begin(u8"Ã€Ã¢Ã²Ã®ÃÃ", xxx.bool, imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoResize + imgui.WindowFlags.NoSavedSettings)
+    if imgui.Checkbox(u8"Ã‚ÃªÃ«Ã¾Ã·Ã¨Ã²Ã¼/Ã¢Ã»ÃªÃ«Ã¾Ã·Ã¨Ã²Ã¼", xxx.mainState) then
         setting.arm.mainState = xxx.mainState[0]
         json(path):save(setting)
      
@@ -341,7 +341,7 @@ imgui.OnFrame(function() return xxx.bool[0] end, function()
         setting.arm.parachute = xxx.parachute[0]
         json(path):save(setting)
     end
-    if imgui.Button(u8'Âåðíóòüñÿ â ãëàâíîå ìåíþ',imgui.ImVec2(240,24)) then  
+    if imgui.Button(u8'Ã‚Ã¥Ã°Ã­Ã³Ã²Ã¼Ã±Ã¿ Ã¢ Ã£Ã«Ã Ã¢Ã­Ã®Ã¥ Ã¬Ã¥Ã­Ã¾',imgui.ImVec2(240,24)) then  
         windows[0] = true
         xxx.bool[0] = false
 
@@ -350,13 +350,13 @@ imgui.OnFrame(function() return xxx.bool[0] end, function()
 end)
 
 
---------------------------Ïîñòàâêè-------------------------------------
+--------------------------ÃÃ®Ã±Ã²Ã Ã¢ÃªÃ¨-------------------------------------
 imgui.OnFrame(function() return her[0] end, function (player)
     imgui.SetNextWindowPos(imgui.ImVec2(500,500), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(720, 250), imgui.Cond.Always)
-    imgui.Begin(u8'Ïîñòàâêè', her, imgui.WindowFlags.NoResize)
+    imgui.Begin(u8'ÃÃ®Ã±Ã²Ã Ã¢ÃªÃ¨', her, imgui.WindowFlags.NoResize)
     
-    if imgui.Checkbox(u8'Àâòî /carm', autoCarm) then
+    if imgui.Checkbox(u8'Ã€Ã¢Ã²Ã® /carm', autoCarm) then
         settings.nigger.Carm = autoCarm[0] 
         inicfg.save(settings, 'ArmyHelper.ini')
     end
@@ -364,28 +364,28 @@ imgui.OnFrame(function() return her[0] end, function (player)
     imgui.TextDisabled("(?)")
     if imgui.IsItemHovered() then
         imgui.BeginTooltip()
-        imgui.Text(u8'Ïðè ïîäëåòå ê ËÂà è ñóõîãðóçó àâòîìàòè÷åñêè ââîäèò /carm')
+        imgui.Text(u8'ÃÃ°Ã¨ Ã¯Ã®Ã¤Ã«Ã¥Ã²Ã¥ Ãª Ã‹Ã‚Ã  Ã¨ Ã±Ã³ÃµÃ®Ã£Ã°Ã³Ã§Ã³ Ã Ã¢Ã²Ã®Ã¬Ã Ã²Ã¨Ã·Ã¥Ã±ÃªÃ¨ Ã¢Ã¢Ã®Ã¤Ã¨Ã² /carm')
         imgui.EndTooltip()
     end
     imgui.Separator()
-    imgui.Text(u8("Ðåäàêòèðîâàíèå äîêëàäîâ:"))
-    if imgui.InputText(u8'Íà÷àëî ïîñòàâîê',dok1, 256) then
+    imgui.Text(u8("ÃÃ¥Ã¤Ã ÃªÃ²Ã¨Ã°Ã®Ã¢Ã Ã­Ã¨Ã¥ Ã¤Ã®ÃªÃ«Ã Ã¤Ã®Ã¢:"))
+    if imgui.InputText(u8'ÃÃ Ã·Ã Ã«Ã® Ã¯Ã®Ã±Ã²Ã Ã¢Ã®Ãª',dok1, 256) then
         settings.nigger.nach = u8:decode(str(dok1))
         inicfg.save(settings, 'ArmyHelper.ini')
     end
-    if imgui.InputText(u8'Çàâåðøåíèå ïîñòàâîê',dok2, 256) then
+    if imgui.InputText(u8'Ã‡Ã Ã¢Ã¥Ã°Ã¸Ã¥Ã­Ã¨Ã¥ Ã¯Ã®Ã±Ã²Ã Ã¢Ã®Ãª',dok2, 256) then
         settings.nigger.zav = u8:decode(str(dok2))
         inicfg.save(settings, 'ArmyHelper.ini')
     end
-    if imgui.InputText(u8'Çàãðóçêà íà ñóõîãðóçå',dok3, 256) then
+    if imgui.InputText(u8'Ã‡Ã Ã£Ã°Ã³Ã§ÃªÃ  Ã­Ã  Ã±Ã³ÃµÃ®Ã£Ã°Ã³Ã§Ã¥',dok3, 256) then
         settings.nigger.suhoi = u8:decode(str(dok3))
         inicfg.save(settings, 'ArmyHelper.ini')
     end
-    if imgui.InputText(u8'Ðàçãðóçêà íà ËÂà (x/500 ïèñàòü íå íàäî)',dok4, 256) then
+    if imgui.InputText(u8'ÃÃ Ã§Ã£Ã°Ã³Ã§ÃªÃ  Ã­Ã  Ã‹Ã‚Ã  (x/500 Ã¯Ã¨Ã±Ã Ã²Ã¼ Ã­Ã¥ Ã­Ã Ã¤Ã®)',dok4, 256) then
         settings.nigger.raz = u8:decode(str(dok4))
         inicfg.save(settings, 'ArmyHelper.ini')
     end
-    if imgui.Button(u8'Âåðíóòüñÿ â ãëàâíîå ìåíþ',imgui.ImVec2(240,24)) then  
+    if imgui.Button(u8'Ã‚Ã¥Ã°Ã­Ã³Ã²Ã¼Ã±Ã¿ Ã¢ Ã£Ã«Ã Ã¢Ã­Ã®Ã¥ Ã¬Ã¥Ã­Ã¾',imgui.ImVec2(240,24)) then  
         windows[0] = true
         her[0] = false
 
@@ -401,49 +401,49 @@ end)
 
 
 
------------------------------ÈÍÔÎÐÌÀÖÈß----------------------------------
+-----------------------------ÃˆÃÃ”ÃŽÃÃŒÃ€Ã–ÃˆÃŸ----------------------------------
 imgui.OnFrame(function() return pizda[0] end, function (player)
     imgui.SetNextWindowPos(imgui.ImVec2(500,500), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(600, 400), imgui.Cond.Always)
-    imgui.Begin(u8'Èíôîðìàöèÿ', pizda, imgui.WindowFlags.NoResize)
+    imgui.Begin(u8'ÃˆÃ­Ã´Ã®Ã°Ã¬Ã Ã¶Ã¨Ã¿', pizda, imgui.WindowFlags.NoResize)
     if imgui.BeginTabBar('Tabs') then 
-        if imgui.BeginTabItem(u8'Êëàâèøè') then 
+        if imgui.BeginTabItem(u8'ÃŠÃ«Ã Ã¢Ã¨Ã¸Ã¨') then 
             imgui.Columns(2) 
             imgui.Text(u8'L') imgui.SetColumnWidth(-1,80) 
             imgui.NextColumn()
-            imgui.Text(u8'Îòïðàâëÿåò â ÷àò /lock') imgui.SetColumnWidth(-1, 400) 
+            imgui.Text(u8'ÃŽÃ²Ã¯Ã°Ã Ã¢Ã«Ã¿Ã¥Ã² Ã¢ Ã·Ã Ã² /lock') imgui.SetColumnWidth(-1, 400) 
             imgui.Columns(1)
             imgui.Separator()
            
             imgui.Columns(2)
             imgui.Text(u8'F2') imgui.SetColumnWidth(-1, 80)
             imgui.NextColumn()
-            imgui.Text(u8'Ìåíþ äîêëàäîâ') imgui.SetColumnWidth(-1, 400) 
+            imgui.Text(u8'ÃŒÃ¥Ã­Ã¾ Ã¤Ã®ÃªÃ«Ã Ã¤Ã®Ã¢') imgui.SetColumnWidth(-1, 400) 
             imgui.Columns(1)
             imgui.Separator()
 
             imgui.Columns(2)
             imgui.Text(u8'N') imgui.SetColumnWidth(-1, 80)
             imgui.NextColumn()
-            imgui.Text(u8'Ìåíþ ïîñòàâîê(ðàáîòàåò òîëüêî â ìàòîëåòå)') imgui.SetColumnWidth(-1, 400) 
+            imgui.Text(u8'ÃŒÃ¥Ã­Ã¾ Ã¯Ã®Ã±Ã²Ã Ã¢Ã®Ãª(Ã°Ã Ã¡Ã®Ã²Ã Ã¥Ã² Ã²Ã®Ã«Ã¼ÃªÃ® Ã¢ Ã¬Ã Ã²Ã®Ã«Ã¥Ã²Ã¥)') imgui.SetColumnWidth(-1, 400) 
             imgui.Columns(1)
             imgui.Separator()
 
             imgui.Columns(2)
             imgui.Text(u8'B') imgui.SetColumnWidth(-1, 80)
             imgui.NextColumn()
-            imgui.Text(u8'Áûñòðûé /clist ') imgui.SetColumnWidth(-1, 400) 
+            imgui.Text(u8'ÃÃ»Ã±Ã²Ã°Ã»Ã© /clist ') imgui.SetColumnWidth(-1, 400) 
             imgui.Columns(1)
             imgui.Separator()
             imgui.EndTabItem() 
         end
         
     
-        if imgui.BeginTabItem(u8'Êîìàíäû') then 
+        if imgui.BeginTabItem(u8'ÃŠÃ®Ã¬Ã Ã­Ã¤Ã»') then 
             imgui.Columns(2) 
              imgui.Text(u8'/mask') imgui.SetColumnWidth(-1,80) 
              imgui.NextColumn()
-             imgui.Text(u8'Îòïðàâëÿåò â ÷àò îòûãðîâêó ìàñêè') imgui.SetColumnWidth(-1, 400) 
+             imgui.Text(u8'ÃŽÃ²Ã¯Ã°Ã Ã¢Ã«Ã¿Ã¥Ã² Ã¢ Ã·Ã Ã² Ã®Ã²Ã»Ã£Ã°Ã®Ã¢ÃªÃ³ Ã¬Ã Ã±ÃªÃ¨') imgui.SetColumnWidth(-1, 400) 
              imgui.Columns(1)
              imgui.Separator() 
              imgui.EndTabItem() 
@@ -457,7 +457,7 @@ imgui.OnFrame(function() return pizda[0] end, function (player)
    
    
    
-    if imgui.Button(u8'Âåðíóòüñÿ â ãëàâíîå ìåíþ',imgui.ImVec2(240,24)) then  
+    if imgui.Button(u8'Ã‚Ã¥Ã°Ã­Ã³Ã²Ã¼Ã±Ã¿ Ã¢ Ã£Ã«Ã Ã¢Ã­Ã®Ã¥ Ã¬Ã¥Ã­Ã¾',imgui.ImVec2(240,24)) then  
         windows[0] = true
         pizda[0] = false
 
@@ -470,10 +470,10 @@ local ComboTest = new.int()
 local kol = new.int()
 local kod = new.int()
 local ppp = new.int()
-local item_list = {u8'ÊÏÏ', u8'Ëîäî÷íàÿ', u8'Òðàï'} --  ñïèñîê
+local item_list = {u8'ÃŠÃÃ', u8'Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿', u8'Ã’Ã°Ã Ã¯'} --  Ã±Ã¯Ã¨Ã±Ã®Ãª
 local kollist = {'1','2','3','4','5'}
-local kodlist = {u8'Êîä 1',u8'Êîä 2',u8'Êîä 2-1',u8'Êîä 3'}
-local prlist = {u8'10-100',u8'Ïîïîëíåíèå ÁÏ',u8'Ïîñòðîåíèå', u8'Ïðèêàç'}
+local kodlist = {u8'ÃŠÃ®Ã¤ 1',u8'ÃŠÃ®Ã¤ 2',u8'ÃŠÃ®Ã¤ 2-1',u8'ÃŠÃ®Ã¤ 3'}
+local prlist = {u8'10-100',u8'ÃÃ®Ã¯Ã®Ã«Ã­Ã¥Ã­Ã¨Ã¥ ÃÃ',u8'ÃÃ®Ã±Ã²Ã°Ã®Ã¥Ã­Ã¨Ã¥', u8'ÃÃ°Ã¨ÃªÃ Ã§'}
 local ImItems = imgui.new['const char*'][#item_list](item_list)
 local list = imgui.new['const char*'][#kollist](kollist)
 local sost = imgui.new['const char*'][#kodlist](kodlist)
@@ -482,27 +482,27 @@ local pr = imgui.new['const char*'][#prlist](prlist)
 imgui.OnFrame(function() return qwerty[0] end, function (player)
     imgui.SetNextWindowPos(imgui.ImVec2(500,500), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(240, 240), imgui.Cond.Always)
-    imgui.Begin(u8'Äîêëàäû', qwerty, imgui.WindowFlags.NoResize)
-    imgui.Combo(u8'Ïîñò',ComboTest,ImItems, #item_list)
-    imgui.Combo(u8'Ñîñòàâ',kol,list, #kollist)
-    imgui.Combo(u8'Êîä',kod,sost, #kodlist)
-    imgui.Combo(u8'Ïðè÷èíà',ppp,pr, #prlist)
-    imgui.Text(u8'Êëàâèøà 1 - Çàñòóïèë íà ïîñò ')
-    imgui.Text(u8'Êëàâèøà 2 - Ñîñòîÿíèå ïîñòà ')
-    imgui.Text(u8'Êëàâèøà 3 - Ïîêèíóë ïîñò ')
+    imgui.Begin(u8'Ã„Ã®ÃªÃ«Ã Ã¤Ã»', qwerty, imgui.WindowFlags.NoResize)
+    imgui.Combo(u8'ÃÃ®Ã±Ã²',ComboTest,ImItems, #item_list)
+    imgui.Combo(u8'Ã‘Ã®Ã±Ã²Ã Ã¢',kol,list, #kollist)
+    imgui.Combo(u8'ÃŠÃ®Ã¤',kod,sost, #kodlist)
+    imgui.Combo(u8'ÃÃ°Ã¨Ã·Ã¨Ã­Ã ',ppp,pr, #prlist)
+    imgui.Text(u8'ÃŠÃ«Ã Ã¢Ã¨Ã¸Ã  1 - Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã² ')
+    imgui.Text(u8'ÃŠÃ«Ã Ã¢Ã¨Ã¸Ã  2 - Ã‘Ã®Ã±Ã²Ã®Ã¿Ã­Ã¨Ã¥ Ã¯Ã®Ã±Ã²Ã  ')
+    imgui.Text(u8'ÃŠÃ«Ã Ã¢Ã¨Ã¸Ã  3 - ÃÃ®ÃªÃ¨Ã­Ã³Ã« Ã¯Ã®Ã±Ã² ')
     imgui.End()
 end)
 
 imgui.OnFrame(function() return xxl[0] end, function (player)
     imgui.SetNextWindowPos(imgui.ImVec2(500,500), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(300, 100), imgui.Cond.Always)
-    imgui.Begin(u8'Ñîñòîÿíèå ñêëàäà', xxl, imgui.WindowFlags.NoResize)
-    imgui.Text(u8'Ââåäèòå êîëè÷åñòâî ìàòåðèàëîâ íà ñêëàäå')
+    imgui.Begin(u8'Ã‘Ã®Ã±Ã²Ã®Ã¿Ã­Ã¨Ã¥ Ã±ÃªÃ«Ã Ã¤Ã ', xxl, imgui.WindowFlags.NoResize)
+    imgui.Text(u8'Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ ÃªÃ®Ã«Ã¨Ã·Ã¥Ã±Ã²Ã¢Ã® Ã¬Ã Ã²Ã¥Ã°Ã¨Ã Ã«Ã®Ã¢ Ã­Ã  Ã±ÃªÃ«Ã Ã¤Ã¥')
     if imgui.InputText('##FFF', sclad, 256) then
         settings.nigger.sost = u8:decode(str(sclad)) 
         inicfg.save(settings, 'ArmyHelper.ini')
     end
-    if imgui.Button(u8'Îòïðàâèòü äîêëàä') then
+    if imgui.Button(u8'ÃŽÃ²Ã¯Ã°Ã Ã¢Ã¨Ã²Ã¼ Ã¤Ã®ÃªÃ«Ã Ã¤') then
         sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..'' ..settings.nigger.raz..'' ..settings.nigger.sost.. '/500')
        
     end
@@ -513,17 +513,17 @@ end)
 imgui.OnFrame(function() return jopa[0] end, function (player)
     imgui.SetNextWindowPos(imgui.ImVec2(500,500), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(256, 150), imgui.Cond.Always)
-    imgui.Begin(u8'Ìåíþ äîêëàäîâ', jopa, imgui.WindowFlags.NoResize)
-    if imgui.Button(u8'Íà÷àëî ïîñòàâîê',imgui.ImVec2(240,24)) then
+    imgui.Begin(u8'ÃŒÃ¥Ã­Ã¾ Ã¤Ã®ÃªÃ«Ã Ã¤Ã®Ã¢', jopa, imgui.WindowFlags.NoResize)
+    if imgui.Button(u8'ÃÃ Ã·Ã Ã«Ã® Ã¯Ã®Ã±Ã²Ã Ã¢Ã®Ãª',imgui.ImVec2(240,24)) then
         sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ' ..settings.nigger.nach..'')
     end
-    if imgui.Button(u8'Çàãðóçèëñÿ íà ñóõîãðóçå',imgui.ImVec2(240,24)) then
+    if imgui.Button(u8'Ã‡Ã Ã£Ã°Ã³Ã§Ã¨Ã«Ã±Ã¿ Ã­Ã  Ã±Ã³ÃµÃ®Ã£Ã°Ã³Ã§Ã¥',imgui.ImVec2(240,24)) then
         sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ' ..settings.nigger.suhoi..'')
     end
-    if imgui.Button(u8'Ðàçãðóçèëñÿ íà ËÂà',imgui.ImVec2(240,24)) then  
+    if imgui.Button(u8'ÃÃ Ã§Ã£Ã°Ã³Ã§Ã¨Ã«Ã±Ã¿ Ã­Ã  Ã‹Ã‚Ã ',imgui.ImVec2(240,24)) then  
         xxl[0] = true
     end
-    if imgui.Button(u8'Çàâåðøàþ ïîñòàâêè',imgui.ImVec2(240,24)) then  
+    if imgui.Button(u8'Ã‡Ã Ã¢Ã¥Ã°Ã¸Ã Ã¾ Ã¯Ã®Ã±Ã²Ã Ã¢ÃªÃ¨',imgui.ImVec2(240,24)) then  
         sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ' ..settings.nigger.zav..'')
     end
     imgui.End()
@@ -543,41 +543,41 @@ end
 
 
 function sampev.onServerMessage(color, text)
-    if text == " Ðàáî÷èé äåíü íà÷àò" and color == 1790050303  then
+    if text == " ÃÃ Ã¡Ã®Ã·Ã¨Ã© Ã¤Ã¥Ã­Ã¼ Ã­Ã Ã·Ã Ã²" and color == 1790050303  then
         lua_thread.create(function()
             wait(1500)
             sampSendChat('/'..settings.cmd.hahaha..' '..settings.nigger.clist..' ')
         end)
     end 
-    ----------------------------- ÁËÎÊÈÐÎÂÙÈÊ ÐÅÊËÀÌÛ -----------------------------
-    if color == 14221567 and string.find (text,'Îáúÿâëåíèå:',1,true) and block[0] then 
+    ----------------------------- ÃÃ‹ÃŽÃŠÃˆÃÃŽÃ‚Ã™ÃˆÃŠ ÃÃ…ÃŠÃ‹Ã€ÃŒÃ› -----------------------------
+    if color == 14221567 and string.find (text,'ÃŽÃ¡ÃºÃ¿Ã¢Ã«Ã¥Ã­Ã¨Ã¥:',1,true) and block[0] then 
         return false
         end
-        if color == 14221567 and string.find (text,'Ðåäàêöèÿ News',1,true) and block[0] then 
+        if color == 14221567 and string.find (text,'ÃÃ¥Ã¤Ã ÃªÃ¶Ã¨Ã¿ News',1,true) and block[0] then 
         return false
         end
     
-    ---------------------------ÁËÎÊÈÐÎÂÙÈÊ ÀÄÌÈÍ×ÀÒÀ----------------------------
+    ---------------------------ÃÃ‹ÃŽÃŠÃˆÃÃŽÃ‚Ã™ÃˆÃŠ Ã€Ã„ÃŒÃˆÃÃ—Ã€Ã’Ã€----------------------------
     
-    if color == -10270721 and string.find (text,'Àäìèíèñòðàòîð:',1,true) and admin[0] then 
+    if color == -10270721 and string.find (text,'Ã€Ã¤Ã¬Ã¨Ã­Ã¨Ã±Ã²Ã°Ã Ã²Ã®Ã°:',1,true) and admin[0] then 
         return false
         end
-        if color == -10270721 and string.find (text,'áàí ÷àòà',1,true) and admin[0] then 
+        if color == -10270721 and string.find (text,'Ã¡Ã Ã­ Ã·Ã Ã²Ã ',1,true) and admin[0] then 
         return false
         end
     
 
- ------------------------Áëîêèðîâêà íîâîñòåé--------------------------------------
-    if color == 641859327 and string.find (text,'[Íîâîñòè]:',1,true) and qqq[0] then 
+ ------------------------ÃÃ«Ã®ÃªÃ¨Ã°Ã®Ã¢ÃªÃ  Ã­Ã®Ã¢Ã®Ã±Ã²Ã¥Ã©--------------------------------------
+    if color == 641859327 and string.find (text,'[ÃÃ®Ã¢Ã®Ã±Ã²Ã¨]:',1,true) and qqq[0] then 
         return false
         end
-        if color == -1 and string.find (text,'-----------=== Ãîñóäàðñòâåííûå Íîâîñòè ===-----------',1,true) and qqq[0] then 
+        if color == -1 and string.find (text,'-----------=== ÃƒÃ®Ã±Ã³Ã¤Ã Ã°Ã±Ã²Ã¢Ã¥Ã­Ã­Ã»Ã¥ ÃÃ®Ã¢Ã®Ã±Ã²Ã¨ ===-----------',1,true) and qqq[0] then 
         return false
         end
-        if color == 641859327 and string.find (text,'Íîâîñòè:',1,true) and qqq[0] then 
+        if color == 641859327 and string.find (text,'ÃÃ®Ã¢Ã®Ã±Ã²Ã¨:',1,true) and qqq[0] then 
         return false
         end
-   ----------------------------------ÖÂÅÒÍÛÅ ÍÈÊÈ Â ×ÀÒÅ-----------------------------
+   ----------------------------------Ã–Ã‚Ã…Ã’ÃÃ›Ã… ÃÃˆÃŠÃˆ Ã‚ Ã—Ã€Ã’Ã…-----------------------------
     if text:find("%w+_%w+%[%d+%]%: .*") and checkboxone[0] then
         local nick = text:match("(%w+_%w+)%[%d+%]%:")
         local hexcolorchat = bit.tohex(bit.rshift(color, 8), 6)
@@ -947,10 +947,10 @@ imgui.OnFrame(function() return not isGamePaused() and show_window[0] end, funct
             imgui.CenterColumnText("#")
             imgui.NextColumn()
             imgui.VerticalSeparator()
-            imgui.CenterColumnText(u8"Êëàâèøà")
+            imgui.CenterColumnText(u8"ÃŠÃ«Ã Ã¢Ã¨Ã¸Ã ")
             imgui.NextColumn()
             imgui.VerticalSeparator()
-            imgui.CenterColumnText(u8"Íàçâàíèå áèíäà")
+            imgui.CenterColumnText(u8"ÃÃ Ã§Ã¢Ã Ã­Ã¨Ã¥ Ã¡Ã¨Ã­Ã¤Ã ")
             imgui.NextColumn()
             imgui.Separator()
             for id, data in ipairs(hotkeys) do
@@ -960,20 +960,20 @@ imgui.OnFrame(function() return not isGamePaused() and show_window[0] end, funct
                     current_hotkey = id
                 end
                 imgui.NextColumn()
-                imgui.CenterColumnText(keyname:len() > 0 and keyname or u8"")
+                imgui.CenterColumnText(keyname:len() > 0 and keyname or u8"Â—")
                 imgui.NextColumn()
-                imgui.CenterColumnText(desc:len() > 0 and desc or u8"")
+                imgui.CenterColumnText(desc:len() > 0 and desc or u8"Â—")
                 imgui.NextColumn()
             end
         imgui.EndChild()
         imgui.SetCursorPosY(imgui.GetCursorPosY() + 5)
-        if imgui.Button(u8'Âåðíóòüñÿ â ãëàâíîå ìåíþ',imgui.ImVec2(200,24)) then  
+        if imgui.Button(u8'Ã‚Ã¥Ã°Ã­Ã³Ã²Ã¼Ã±Ã¿ Ã¢ Ã£Ã«Ã Ã¢Ã­Ã®Ã¥ Ã¬Ã¥Ã­Ã¾',imgui.ImVec2(200,24)) then  
             windows[0] = true
             show_window[0] = false
     
         end
         imgui.SameLine()
-        if imgui.Button(u8"Ñîçäàòü", imgui.ImVec2(120,24)) then
+        if imgui.Button(u8"Ã‘Ã®Ã§Ã¤Ã Ã²Ã¼", imgui.ImVec2(120,24)) then
             table.insert(hotkeys, {keys = {}, content = "", description = ""})
 
             current_hotkey = #hotkeys
@@ -981,20 +981,20 @@ imgui.OnFrame(function() return not isGamePaused() and show_window[0] end, funct
             imgui.StrCopy(description_hotkey, hotkey.description)
             imgui.StrCopy(content_hotkey, hotkey.content)
             keys_hotkey.v = hotkey.keys
-            imgui.OpenPopup(u8"Ðåäàêòîð")
+            imgui.OpenPopup(u8"ÃÃ¥Ã¤Ã ÃªÃ²Ã®Ã°")
         end
         imgui.SameLine()
-        if imgui.Button(u8"Ðåäàêòèðîâàòü", imgui.ImVec2(120,24)) then
+        if imgui.Button(u8"ÃÃ¥Ã¤Ã ÃªÃ²Ã¨Ã°Ã®Ã¢Ã Ã²Ã¼", imgui.ImVec2(120,24)) then
             if current_hotkey then
                 local hotkey = hotkeys[current_hotkey]
                 imgui.StrCopy(description_hotkey, hotkey.description)
                 imgui.StrCopy(content_hotkey, hotkey.content)
                 keys_hotkey.v = hotkey.keys
-                imgui.OpenPopup(u8"Ðåäàêòîð")
+                imgui.OpenPopup(u8"ÃÃ¥Ã¤Ã ÃªÃ²Ã®Ã°")
              end
         end
         imgui.SameLine()
-        if imgui.Button(u8"Óäàëèòü", imgui.ImVec2(120,24)) then
+        if imgui.Button(u8"Ã“Ã¤Ã Ã«Ã¨Ã²Ã¼", imgui.ImVec2(120,24)) then
             if current_hotkey then
                 local keycombo = hotkeys[current_hotkey].keys
                 if rkeys.isHotKeyDefined(keycombo) then
@@ -1004,12 +1004,12 @@ imgui.OnFrame(function() return not isGamePaused() and show_window[0] end, funct
                 current_hotkey = nil
              end
         end
-        if imgui.BeginPopupModal(u8"Ðåäàêòîð", nil, imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoResize + imgui.WindowFlags.NoMove) then
+        if imgui.BeginPopupModal(u8"ÃÃ¥Ã¤Ã ÃªÃ²Ã®Ã°", nil, imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoResize + imgui.WindowFlags.NoMove) then
             imgui.Columns(2, nil, false)
             imgui.SetColumnWidth(-1, 158)
-            imgui.Text(u8"Êëàâèøà:")
+            imgui.Text(u8"ÃŠÃ«Ã Ã¢Ã¨Ã¸Ã :")
             imgui.NextColumn()
-            imgui.Text(u8"Íàçâàíèå áèíäà:")
+            imgui.Text(u8"ÃÃ Ã§Ã¢Ã Ã­Ã¨Ã¥ Ã¡Ã¨Ã­Ã¤Ã :")
             imgui.Columns()
             if imgui.HotKey("##keys", keys_hotkey, ImVec2(150, 20)) then
                 local hotkey = hotkeys[current_hotkey]
@@ -1023,12 +1023,12 @@ imgui.OnFrame(function() return not isGamePaused() and show_window[0] end, funct
             imgui.PushItemWidth(350)
             imgui.InputText("##description", description_hotkey, ffi.sizeof(description_hotkey) - 1)
             imgui.PopItemWidth()
-            imgui.Text(u8"Òåêñò:")
+            imgui.Text(u8"Ã’Ã¥ÃªÃ±Ã²:")
             imgui.SameLine()
-            imgui.Text(u8"Çàäåðæêà - <time>")
+            imgui.Text(u8"Ã‡Ã Ã¤Ã¥Ã°Ã¦ÃªÃ  - <time>")
             imgui.InputTextMultiline("##content", content_hotkey, ffi.sizeof(content_hotkey) - 1, ImVec2(504, 150))
             imgui.SetCursorPosY(imgui.GetCursorPosY() + 5)
-            if imgui.Button(u8"Ñîõðàíèòü", ImVec2(250, 20)) then
+            if imgui.Button(u8"Ã‘Ã®ÃµÃ°Ã Ã­Ã¨Ã²Ã¼", ImVec2(250, 20)) then
                 local hotkey = hotkeys[current_hotkey]
                 if rkeys.isHotKeyDefined(hotkey.keys) then
                     rkeys.unRegisterHotKey(hotkey.keys)
@@ -1046,7 +1046,7 @@ imgui.OnFrame(function() return not isGamePaused() and show_window[0] end, funct
                 imgui.CloseCurrentPopup()
             end
             imgui.SameLine()
-            if imgui.Button(u8"Çàêðûòü", ImVec2(250, 20)) then
+            if imgui.Button(u8"Ã‡Ã ÃªÃ°Ã»Ã²Ã¼", ImVec2(250, 20)) then
                 imgui.CloseCurrentPopup()
             end
             imgui.EndPopup()
@@ -1055,8 +1055,8 @@ imgui.OnFrame(function() return not isGamePaused() and show_window[0] end, funct
 end)
 
 
-local kvl = {"À", "Á", "Â", "Ã", "Ä", "Æ", "Ç", "È", "Ê", "Ë", "Ì", "Í", "Î", "Ï", "Ð", "Ñ", "Ò", "Ó", "Ô", "Õ", "Ö", "×", "Ø", "ß"}
-local KV = "Ã-11"
+local kvl = {"Ã€", "Ã", "Ã‚", "Ãƒ", "Ã„", "Ã†", "Ã‡", "Ãˆ", "ÃŠ", "Ã‹", "ÃŒ", "Ã", "ÃŽ", "Ã", "Ã", "Ã‘", "Ã’", "Ã“", "Ã”", "Ã•", "Ã–", "Ã—", "Ã˜", "ÃŸ"}
+local KV = "Ãƒ-11"
 function main()
    
     if not isSampfuncsLoaded() or not isSampLoaded() then
@@ -1072,7 +1072,7 @@ function main()
     
 
 
-    sampAddChatMessage('ArmyHelper: Ãîòîâ ê ðàáîòå. Àêòèâàöèÿ: /ah ffffffffffff', 0xFFFFFFF )
+    sampAddChatMessage('ArmyHelper: ÃƒÃ®Ã²Ã®Ã¢ Ãª Ã°Ã Ã¡Ã®Ã²Ã¥. Ã€ÃªÃ²Ã¨Ã¢Ã Ã¶Ã¨Ã¿: /ah ffffffffffff', 0xFFFFFFF )
     
 
     
@@ -1116,7 +1116,7 @@ function main()
     sampRegisterChatCommand('mask', function(text) sampSendChat('/clist 32') 
         lua_thread.create(function()
         wait(1000)
-        sampSendChat('/do Íà ëèöå ìàñêà. Îïîçíàâàòåëüíûå çíàêè îòñóòñòâóþò. Ëè÷íîñòü îïîçíàòü íåâîçìîæíî.')
+        sampSendChat('/do ÃÃ  Ã«Ã¨Ã¶Ã¥ Ã¬Ã Ã±ÃªÃ . ÃŽÃ¯Ã®Ã§Ã­Ã Ã¢Ã Ã²Ã¥Ã«Ã¼Ã­Ã»Ã¥ Ã§Ã­Ã ÃªÃ¨ Ã®Ã²Ã±Ã³Ã²Ã±Ã²Ã¢Ã³Ã¾Ã². Ã‹Ã¨Ã·Ã­Ã®Ã±Ã²Ã¼ Ã®Ã¯Ã®Ã§Ã­Ã Ã²Ã¼ Ã­Ã¥Ã¢Ã®Ã§Ã¬Ã®Ã¦Ã­Ã®.')
         end) end )
 
        
@@ -1145,10 +1145,10 @@ function main()
             if lva > 200 and lva < 203  then carmResponse = 2 end
 
   
-        if isCharInAnyCar(PLAYER_PED) then -- Ïðîâåðêà íà òðàíñïîðò
-            local carhandle = storeCarCharIsInNoSave(PLAYER_PED) -- Ïîëó÷åíèÿ handle òðàíñïîðòà
-            local idcar = getCarModel(carhandle) -- Ïîëó÷åíèå ID òðàíñïîðòà
-            print(idcar) -- Âûâîäèì ID òðàíñïîðòà â êîíñîëü Sampfuncs.
+        if isCharInAnyCar(PLAYER_PED) then -- ÃÃ°Ã®Ã¢Ã¥Ã°ÃªÃ  Ã­Ã  Ã²Ã°Ã Ã­Ã±Ã¯Ã®Ã°Ã²
+            local carhandle = storeCarCharIsInNoSave(PLAYER_PED) -- ÃÃ®Ã«Ã³Ã·Ã¥Ã­Ã¨Ã¿ handle Ã²Ã°Ã Ã­Ã±Ã¯Ã®Ã°Ã²Ã 
+            local idcar = getCarModel(carhandle) -- ÃÃ®Ã«Ã³Ã·Ã¥Ã­Ã¨Ã¥ ID Ã²Ã°Ã Ã­Ã±Ã¯Ã®Ã°Ã²Ã 
+            print(idcar) -- Ã‚Ã»Ã¢Ã®Ã¤Ã¨Ã¬ ID Ã²Ã°Ã Ã­Ã±Ã¯Ã®Ã°Ã²Ã  Ã¢ ÃªÃ®Ã­Ã±Ã®Ã«Ã¼ Sampfuncs.
             if idcar == 548 and wasKeyPressed(VK_2)  then 
                
                 printStringNow('Press N', 10000)
@@ -1174,162 +1174,162 @@ function main()
     if wasKeyPressed(VK_F2) and not sampIsCursorActive() then qwerty[0] = not qwerty[0] end
     
 
-    if wasKeyPressed(VK_1) and qwerty[0] then -- çàñòóïëåíèå íà ïîñò
-        if ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 0 then -- ÊÏÏ
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:1. Êîä-1')
+    if wasKeyPressed(VK_1) and qwerty[0] then -- Ã§Ã Ã±Ã²Ã³Ã¯Ã«Ã¥Ã­Ã¨Ã¥ Ã­Ã  Ã¯Ã®Ã±Ã²
+        if ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 0 then -- ÃŠÃÃ
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 0 and kol[0] == 1 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:2. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 0 and kol[0] == 2 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:3. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 0 and kol[0] == 3 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:4. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 0 and kol[0] == 4 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:5. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-1')
         
 
         elseif ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:1. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:1. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:1. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-3')
         
         elseif ComboTest[0] == 0 and kol[0] == 1 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:2. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 0 and kol[0] == 1 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:2. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 1 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:2. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-3')
 
         elseif ComboTest[0] == 0 and kol[0] == 2 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:3. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 0 and kol[0] == 2 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:3. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 2 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:3. Êîä-3')  
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-3')  
 
 
         elseif ComboTest[0] == 0 and kol[0] == 3 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:4. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 0 and kol[0] == 3 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:4. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 3 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:4. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-3')
 
 
         elseif ComboTest[0] == 0 and kol[0] == 4 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:5. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 0 and kol[0] == 4 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:5. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 4 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:ÊÏÏ. Ñîñòàâ:5. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-3')
         
         
 
 
 
 
-        elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 0 then -- ËÎÄÎ×ÍÀß
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:1. Êîä-1')
+        elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 0 then -- Ã‹ÃŽÃ„ÃŽÃ—ÃÃ€ÃŸ
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 1 and kol[0] == 1 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:2. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 1 and kol[0] == 2 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:3. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 1 and kol[0] == 3 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:4. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 1 and kol[0] == 4 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:5. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-1')
         
 
         elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:1. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:1. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:1. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-3')
         
         elseif ComboTest[0] == 1 and kol[0] == 1 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:2. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 1 and kol[0] == 1 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:2. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 1 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:2. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-3')
 
         elseif ComboTest[0] == 1 and kol[0] == 2 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:3. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 1 and kol[0] == 2 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:3. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 2 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:3. Êîä-3')  
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-3')  
 
 
         elseif ComboTest[0] == 1 and kol[0] == 3 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:4. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 1 and kol[0] == 3 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:4. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 3 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:4. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-3')
 
 
         elseif ComboTest[0] == 1 and kol[0] == 4 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:5. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 1 and kol[0] == 4 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:5. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 4 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:5. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-3')
         
         
 
 
 
-        elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 0 then -- Òðàï
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:1. Êîä-1')
+        elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 0 then -- Ã’Ã°Ã Ã¯
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 2 and kol[0] == 1 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:2. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 2 and kol[0] == 2 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:3. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 2 and kol[0] == 3 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:4. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 2 and kol[0] == 4 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:5. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-1')
         
 
         elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:1. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:1. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:1. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-3')
         
         elseif ComboTest[0] == 2 and kol[0] == 1 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:2. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 2 and kol[0] == 1 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:2. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 1 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:2. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-3')
 
         elseif ComboTest[0] == 2 and kol[0] == 2 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:3. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 2 and kol[0] == 2 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:3. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 2 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:3. Êîä-3')  
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-3')  
 
 
         elseif ComboTest[0] == 2 and kol[0] == 3 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:4. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 2 and kol[0] == 3 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:4. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 3 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:4. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-3')
 
 
         elseif ComboTest[0] == 2 and kol[0] == 4 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:5. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 2 and kol[0] == 4 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:5. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 4 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Çàñòóïèë íà ïîñò:Òðàï. Ñîñòàâ:5. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ã‡Ã Ã±Ã²Ã³Ã¯Ã¨Ã« Ã­Ã  Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-3')
         end
     end
    
@@ -1342,192 +1342,192 @@ function main()
    
    
    
-    if wasKeyPressed(VK_2) and qwerty[0] then -- Cîñòîÿíèå ïîñòà
-        if ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 0 then -- ÊÏÏ
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:1. Êîä-1')
+    if wasKeyPressed(VK_2) and qwerty[0] then -- CÃ®Ã±Ã²Ã®Ã¿Ã­Ã¨Ã¥ Ã¯Ã®Ã±Ã²Ã 
+        if ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 0 then -- ÃŠÃÃ
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 0 and kol[0] == 1 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:2. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 0 and kol[0] == 2 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:3. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 0 and kol[0] == 3 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:4. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 0 and kol[0] == 4 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:5. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-1')
         
 
         elseif ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:1. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:1. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:1. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-3')
         
         elseif ComboTest[0] == 0 and kol[0] == 1 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:2. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 0 and kol[0] == 1 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:2. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 1 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:2. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-3')
 
         elseif ComboTest[0] == 0 and kol[0] == 2 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:3. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 0 and kol[0] == 2 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:3. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 2 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:3. Êîä-3')  
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-3')  
 
 
         elseif ComboTest[0] == 0 and kol[0] == 3 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:4. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 0 and kol[0] == 3 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:4. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 3 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:4. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-3')
 
 
         elseif ComboTest[0] == 0 and kol[0] == 4 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:5. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 0 and kol[0] == 4 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:5. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 4 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:ÊÏÏ. Ñîñòàâ:5. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:ÃŠÃÃ. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-3')
         
         
 
 
 
 
-        elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 0 then -- ËÎÄÎ×ÍÀß
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:1. Êîä-1')
+        elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 0 then -- Ã‹ÃŽÃ„ÃŽÃ—ÃÃ€ÃŸ
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 1 and kol[0] == 1 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:2. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 1 and kol[0] == 2 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:3. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 1 and kol[0] == 3 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:4. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 1 and kol[0] == 4 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:5. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-1')
         
 
         elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:1. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:1. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:1. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-3')
         
         elseif ComboTest[0] == 1 and kol[0] == 1 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:2. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 1 and kol[0] == 1 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:2. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 1 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:2. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-3')
 
         elseif ComboTest[0] == 1 and kol[0] == 2 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:3. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 1 and kol[0] == 2 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:3. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 2 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:3. Êîä-3')  
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-3')  
 
 
         elseif ComboTest[0] == 1 and kol[0] == 3 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:4. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 1 and kol[0] == 3 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:4. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 3 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:4. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-3')
 
 
         elseif ComboTest[0] == 1 and kol[0] == 4 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:5. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 1 and kol[0] == 4 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:5. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 4 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Ëîäî÷íàÿ. Ñîñòàâ:5. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-3')
         
         
 
 
 
-        elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 0 then -- Òðàï
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:1. Êîä-1')
+        elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 0 then -- Ã’Ã°Ã Ã¯
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 2 and kol[0] == 1 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:2. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 2 and kol[0] == 2 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:3. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 2 and kol[0] == 3 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:4. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-1')
         elseif ComboTest[0] == 2 and kol[0] == 4 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:5. Êîä-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-1')
         
 
         elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:1. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:1. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:1. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:1. ÃŠÃ®Ã¤-3')
         
         elseif ComboTest[0] == 2 and kol[0] == 1 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:2. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 2 and kol[0] == 1 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:2. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 1 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:2. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:2. ÃŠÃ®Ã¤-3')
 
         elseif ComboTest[0] == 2 and kol[0] == 2 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:3. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 2 and kol[0] == 2 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:3. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 2 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:3. Êîä-3')  
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:3. ÃŠÃ®Ã¤-3')  
 
 
         elseif ComboTest[0] == 2 and kol[0] == 3 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:4. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 2 and kol[0] == 3 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:4. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 3 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:4. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:4. ÃŠÃ®Ã¤-3')
 
 
         elseif ComboTest[0] == 2 and kol[0] == 4 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:5. Êîä-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-2')
         elseif ComboTest[0] == 2 and kol[0] == 4 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:5. Êîä-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 4 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîñò:Òðàï. Ñîñòàâ:5. Êîä-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®Ã±Ã²:Ã’Ã°Ã Ã¯. Ã‘Ã®Ã±Ã²Ã Ã¢:5. ÃŠÃ®Ã¤-3')
         end
     end
 
-    if wasKeyPressed(VK_3) and qwerty[0] then -- Ïîêèíóë ïîñò
-        if ComboTest[0] == 0 and ppp[0] == 0 then -- ÊÏÏ
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîêèíóë ïîñò:ÊÏÏ. Ïðè÷èíà:10-100')
+    if wasKeyPressed(VK_3) and qwerty[0] then -- ÃÃ®ÃªÃ¨Ã­Ã³Ã« Ã¯Ã®Ã±Ã²
+        if ComboTest[0] == 0 and ppp[0] == 0 then -- ÃŠÃÃ
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®ÃªÃ¨Ã­Ã³Ã« Ã¯Ã®Ã±Ã²:ÃŠÃÃ. ÃÃ°Ã¨Ã·Ã¨Ã­Ã :10-100')
         elseif ComboTest[0] == 0 and ppp[0] == 1 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîêèíóë ïîñò:ÊÏÏ. Ïðè÷èíà:Ïîïîëíåíèå ÁÏ')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®ÃªÃ¨Ã­Ã³Ã« Ã¯Ã®Ã±Ã²:ÃŠÃÃ. ÃÃ°Ã¨Ã·Ã¨Ã­Ã :ÃÃ®Ã¯Ã®Ã«Ã­Ã¥Ã­Ã¨Ã¥ ÃÃ')
         elseif ComboTest[0] == 0 and ppp[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîêèíóë ïîñò:ÊÏÏ. Ïðè÷èíà:Ïîñòðîåíèå')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®ÃªÃ¨Ã­Ã³Ã« Ã¯Ã®Ã±Ã²:ÃŠÃÃ. ÃÃ°Ã¨Ã·Ã¨Ã­Ã :ÃÃ®Ã±Ã²Ã°Ã®Ã¥Ã­Ã¨Ã¥')
         elseif ComboTest[0] == 0 and ppp[0] == 03 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîêèíóë ïîñò:ÊÏÏ. Ïðè÷èíà:Ïðèêàç')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®ÃªÃ¨Ã­Ã³Ã« Ã¯Ã®Ã±Ã²:ÃŠÃÃ. ÃÃ°Ã¨Ã·Ã¨Ã­Ã :ÃÃ°Ã¨ÃªÃ Ã§')
        
-        elseif ComboTest[0] == 1 and ppp[0] == 0 then -- Ëîäî÷íàÿ
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîêèíóë ïîñò:Ëàäî÷íàÿ. Ïðè÷èíà:10-100')
+        elseif ComboTest[0] == 1 and ppp[0] == 0 then -- Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®ÃªÃ¨Ã­Ã³Ã« Ã¯Ã®Ã±Ã²:Ã‹Ã Ã¤Ã®Ã·Ã­Ã Ã¿. ÃÃ°Ã¨Ã·Ã¨Ã­Ã :10-100')
         elseif ComboTest[0] == 1 and ppp[0] == 1 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîêèíóë ïîñò:Ëîäî÷íàÿ. Ïðè÷èíà:Ïîïîëíåíèå ÁÏ')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®ÃªÃ¨Ã­Ã³Ã« Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. ÃÃ°Ã¨Ã·Ã¨Ã­Ã :ÃÃ®Ã¯Ã®Ã«Ã­Ã¥Ã­Ã¨Ã¥ ÃÃ')
         elseif ComboTest[0] == 1 and ppp[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîêèíóë ïîñò:Ëîäî÷íàÿ. Ïðè÷èíà:Ïîñòðîåíèå')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®ÃªÃ¨Ã­Ã³Ã« Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. ÃÃ°Ã¨Ã·Ã¨Ã­Ã :ÃÃ®Ã±Ã²Ã°Ã®Ã¥Ã­Ã¨Ã¥')
         elseif ComboTest[0] == 1 and ppp[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîêèíóë ïîñò:Ëîäî÷íàÿ. Ïðè÷èíà:Ïðèêàç')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®ÃªÃ¨Ã­Ã³Ã« Ã¯Ã®Ã±Ã²:Ã‹Ã®Ã¤Ã®Ã·Ã­Ã Ã¿. ÃÃ°Ã¨Ã·Ã¨Ã­Ã :ÃÃ°Ã¨ÃªÃ Ã§')
 
-             elseif ComboTest[0] == 2 and ppp[0] == 0 then -- Òðàï
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîêèíóë ïîñò:Òðàï. Ïðè÷èíà:10-100')
+             elseif ComboTest[0] == 2 and ppp[0] == 0 then -- Ã’Ã°Ã Ã¯
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®ÃªÃ¨Ã­Ã³Ã« Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. ÃÃ°Ã¨Ã·Ã¨Ã­Ã :10-100')
         elseif ComboTest[0] == 2 and ppp[0] == 1 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîêèíóë ïîñò:Òðàï. Ïðè÷èíà:Ïîïîëíåíèå ÁÏ')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®ÃªÃ¨Ã­Ã³Ã« Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. ÃÃ°Ã¨Ã·Ã¨Ã­Ã :ÃÃ®Ã¯Ã®Ã«Ã­Ã¥Ã­Ã¨Ã¥ ÃÃ')
         elseif ComboTest[0] == 2 and ppp[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîêèíóë ïîñò:Òðàï. Ïðè÷èíà:Ïîñòðîåíèå')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®ÃªÃ¨Ã­Ã³Ã« Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. ÃÃ°Ã¨Ã·Ã¨Ã­Ã :ÃÃ®Ã±Ã²Ã°Ã®Ã¥Ã­Ã¨Ã¥')
         elseif ComboTest[0] == 2 and ppp[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Ïîêèíóë ïîñò:Òðàï. Ïðè÷èíà:Ïðèêàç')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ÃÃ®ÃªÃ¨Ã­Ã³Ã« Ã¯Ã®Ã±Ã²:Ã’Ã°Ã Ã¯. ÃÃ°Ã¨Ã·Ã¨Ã­Ã :ÃÃ°Ã¨ÃªÃ Ã§')
         end
     end
 
@@ -1543,7 +1543,7 @@ end
 
 
 sampev.onShowDialog = function(dId, style, title, button1, button2, text)
-    if title:find("Ñêëàä%sîðóæèÿ") and setting.arm.mainState then
+    if title:find("Ã‘ÃªÃ«Ã Ã¤%sÃ®Ã°Ã³Ã¦Ã¨Ã¿") and setting.arm.mainState then
         if setting.arm.desertEagle and getAmmo(24) < 63 then
             sampSendDialogResponse(dId, 1, 0, "")
         elseif setting.arm.shotgun and getAmmo(25) < 30 then
@@ -1561,12 +1561,12 @@ sampev.onShowDialog = function(dId, style, title, button1, button2, text)
         end
         return false
     end
-    if title:find("Ðàçäåâàëêà") then
-        sampSendDialogResponse(dId, 1, 0, 'Äà')
+    if title:find("ÃÃ Ã§Ã¤Ã¥Ã¢Ã Ã«ÃªÃ ") then
+        sampSendDialogResponse(dId, 1, 0, 'Ã„Ã ')
         return false
     end
    
-    if title:find("Ðàçâîçêà ìàòåðèàëîâ") and autoCarm[0] then
+    if title:find("ÃÃ Ã§Ã¢Ã®Ã§ÃªÃ  Ã¬Ã Ã²Ã¥Ã°Ã¨Ã Ã«Ã®Ã¢") and autoCarm[0] then
     
         if carmResponse == 0 and autoCarm[0] then sampSendDialogResponse(dId, 1, 0) return false end
         if carmResponse == 2 and autoCarm[0] then sampSendDialogResponse(dId, 1, 2) return false end
@@ -1588,7 +1588,7 @@ function SE.onSendChat(text)
         if KV~=nil then
             text = text:gsub("#kv#", KV)
         else
-            sampAddChatMessage(" Âû âíå êàðòû.", 0xFF0000)  
+            sampAddChatMessage(" Ã‚Ã» Ã¢Ã­Ã¥ ÃªÃ Ã°Ã²Ã».", 0xFF0000)  
             return false
         end
     end
@@ -1605,7 +1605,7 @@ function SE.onSendCommand(text)
           if KV~=nil then
               text = text:gsub("#kv#", KV)
           else
-              sampAddChatMessage(" Âû âíå êàðòû.", 0xFF0000)  
+              sampAddChatMessage(" Ã‚Ã» Ã¢Ã­Ã¥ ÃªÃ Ã°Ã²Ã».", 0xFF0000)  
               return false
           end
       end
