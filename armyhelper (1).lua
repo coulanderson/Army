@@ -1044,7 +1044,7 @@ local kvl = {"À", "Á", "Â", "Ã", "Ä", "Æ", "Ç", "È", "Ê", "Ë", "Ì", "
 local KV = "Ã-11"
 function main()
     while not isSampAvailable() do wait(10000) end
-    sampAddChatMessage('ArmyHelper: Ãîòîâ ê ðàáîòå. Àêòèâàöèÿ: /ah ', 0xFFFFFFF )
+    sampAddChatMessage('ArmyHelper: Ãîòîâ ê ðàáîòå. Àêòèâàöèÿ: /ah fffffffff', 0xFFFFFFF )
     
      if autoupdate_loaded and enable_autoupdate and Update then
         pcall(Update.check, Update.json_url, Update.prefix, Update.url)
