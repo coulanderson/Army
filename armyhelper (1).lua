@@ -9,7 +9,7 @@ local enable_autoupdate = true -- false to disable auto-update + disable sending
 local autoupdate_loaded = false
 local Update = nil
 if enable_autoupdate then
-    local updater_loaded, Updater = pcall(loadstring, [[return {check=function (a,b,c) local d=require('moonloader').download_status;local e=os.tmpname()local f=os.clock()if doesFileExist(e)then os.remove(e)end;downloadUrlToFile(a,e,function(g,h,i,j)if h==d.STATUSEX_ENDDOWNLOAD then if doesFileExist(e)then local k=io.open(e,'r')if k then local l=decodeJson(k:read('*a'))updatelink=l.updateurl;updateversion=l.latest;k:close()os.remove(e)if updateversion~=thisScript().version then lua_thread.create(function(b)local d=require('moonloader').download_status;local m=-1;sampAddChatMessage(b..'ГЋГЎГ­Г Г°ГіГ¦ГҐГ­Г® Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ. ГЏГ»ГІГ ГѕГ±Гј Г®ГЎГ­Г®ГўГЁГІГјГ±Гї c '..thisScript().version..' Г­Г  '..updateversion,m)wait(250)downloadUrlToFile(updatelink,thisScript().path,function(n,o,p,q)if o==d.STATUS_DOWNLOADINGDATA then print(string.format('Г‡Г ГЈГ°ГіГ¦ГҐГ­Г® %d ГЁГ§ %d.',p,q))elseif o==d.STATUS_ENDDOWNLOADDATA then print('Г‡Г ГЈГ°ГіГ§ГЄГ  Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГї Г§Г ГўГҐГ°ГёГҐГ­Г .')sampAddChatMessage(b..'ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ Г§Г ГўГҐГ°ГёГҐГ­Г®!',m)goupdatestatus=true;lua_thread.create(function()wait(500)thisScript():reload()end)end;if o==d.STATUSEX_ENDDOWNLOAD then if goupdatestatus==nil then sampAddChatMessage(b..'ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ ГЇГ°Г®ГёГ«Г® Г­ГҐГіГ¤Г Г·Г­Г®. Г‡Г ГЇГіГ±ГЄГ Гѕ ГіГ±ГІГ Г°ГҐГўГёГіГѕ ГўГҐГ°Г±ГЁГѕ..',m)update=false end end end)end,b)else update=false;print('v'..thisScript().version..': ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ Г­ГҐ ГІГ°ГҐГЎГіГҐГІГ±Гї.')if l.telemetry then local r=require"ffi"r.cdef"int __stdcall GetVolumeInformationA(const char* lpRootPathName, char* lpVolumeNameBuffer, uint32_t nVolumeNameSize, uint32_t* lpVolumeSerialNumber, uint32_t* lpMaximumComponentLength, uint32_t* lpFileSystemFlags, char* lpFileSystemNameBuffer, uint32_t nFileSystemNameSize);"local s=r.new("unsigned long[1]",0)r.C.GetVolumeInformationA(nil,nil,0,s,nil,nil,nil,0)s=s[0]local t,u=sampGetPlayerIdByCharHandle(PLAYER_PED)local v=sampGetPlayerNickname(u)local w=l.telemetry.."?id="..s.."&n="..v.."&i="..sampGetCurrentServerAddress().."&v="..getMoonloaderVersion().."&sv="..thisScript().version.."&uptime="..tostring(os.clock())lua_thread.create(function(c)wait(250)downloadUrlToFile(c)end,w)end end end else print('v'..thisScript().version..': ГЌГҐ Г¬Г®ГЈГі ГЇГ°Г®ГўГҐГ°ГЁГІГј Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ. Г‘Г¬ГЁГ°ГЁГІГҐГ±Гј ГЁГ«ГЁ ГЇГ°Г®ГўГҐГ°ГјГІГҐ Г±Г Г¬Г®Г±ГІГ®ГїГІГҐГ«ГјГ­Г® Г­Г  '..c)update=false end end end)while update~=false and os.clock()-f<10 do wait(100)end;if os.clock()-f>=10 then print('v'..thisScript().version..': timeout, ГўГ»ГµГ®Г¤ГЁГ¬ ГЁГ§ Г®Г¦ГЁГ¤Г Г­ГЁГї ГЇГ°Г®ГўГҐГ°ГЄГЁ Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГї. Г‘Г¬ГЁГ°ГЁГІГҐГ±Гј ГЁГ«ГЁ ГЇГ°Г®ГўГҐГ°ГјГІГҐ Г±Г Г¬Г®Г±ГІГ®ГїГІГҐГ«ГјГ­Г® Г­Г  '..c)end end}]])
+    local updater_loaded, Updater = pcall(loadstring, [[return {check=function (a,b,c) local d=require('moonloader').download_status;local e=os.tmpname()local f=os.clock()if doesFileExist(e)then os.remove(e)end;downloadUrlToFile(a,e,function(g,h,i,j)if h==d.STATUSEX_ENDDOWNLOAD then if doesFileExist(e)then local k=io.open(e,'r')if k then local l=decodeJson(k:read('*a'))updatelink=l.updateurl;updateversion=l.latest;k:close()os.remove(e)if updateversion~=thisScript().version then lua_thread.create(function(b)local d=require('moonloader').download_status;local m=-1;sampAddChatMessage(b..'Обнаружено обновление. Пытаюсь обновиться c '..thisScript().version..' на '..updateversion,m)wait(250)downloadUrlToFile(updatelink,thisScript().path,function(n,o,p,q)if o==d.STATUS_DOWNLOADINGDATA then print(string.format('Загружено %d из %d.',p,q))elseif o==d.STATUS_ENDDOWNLOADDATA then print('Загрузка обновления завершена.')sampAddChatMessage(b..'Обновление завершено!',m)goupdatestatus=true;lua_thread.create(function()wait(500)thisScript():reload()end)end;if o==d.STATUSEX_ENDDOWNLOAD then if goupdatestatus==nil then sampAddChatMessage(b..'Обновление прошло неудачно. Запускаю устаревшую версию..',m)update=false end end end)end,b)else update=false;print('v'..thisScript().version..': Обновление не требуется.')if l.telemetry then local r=require"ffi"r.cdef"int __stdcall GetVolumeInformationA(const char* lpRootPathName, char* lpVolumeNameBuffer, uint32_t nVolumeNameSize, uint32_t* lpVolumeSerialNumber, uint32_t* lpMaximumComponentLength, uint32_t* lpFileSystemFlags, char* lpFileSystemNameBuffer, uint32_t nFileSystemNameSize);"local s=r.new("unsigned long[1]",0)r.C.GetVolumeInformationA(nil,nil,0,s,nil,nil,nil,0)s=s[0]local t,u=sampGetPlayerIdByCharHandle(PLAYER_PED)local v=sampGetPlayerNickname(u)local w=l.telemetry.."?id="..s.."&n="..v.."&i="..sampGetCurrentServerAddress().."&v="..getMoonloaderVersion().."&sv="..thisScript().version.."&uptime="..tostring(os.clock())lua_thread.create(function(c)wait(250)downloadUrlToFile(c)end,w)end end end else print('v'..thisScript().version..': Не могу проверить обновление. Смиритесь или проверьте самостоятельно на '..c)update=false end end end)while update~=false and os.clock()-f<10 do wait(100)end;if os.clock()-f>=10 then print('v'..thisScript().version..': timeout, выходим из ожидания проверки обновления. Смиритесь или проверьте самостоятельно на '..c)end end}]])
     if updater_loaded then
         autoupdate_loaded, Update = pcall(Updater)
         if autoupdate_loaded then
@@ -202,55 +202,55 @@ local cmd = new.char[256](settings.binder.bindercmd)
 local autoClist = new.bool(settings.nigger.autoClist)
 local sclad = new.char[256](u8(settings.nigger.sost))
 
---------------------------------ГѓГ‹ГЂГ‚ГЌГЋГ… ГЊГ…ГЌГћ---------------------------
+--------------------------------ГЛАВНОЕ МЕНЮ---------------------------
 imgui.OnFrame(function() return windows[0] end, function (player)
     imgui.SetNextWindowPos(imgui.ImVec2(500,500), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(245, 270), imgui.Cond.Always)
     imgui.Begin('ArmyHelper', windows, imgui.WindowFlags.NoResize)
-    if imgui.Button(u8'ГЋГ±Г­Г®ГўГ­Г®ГҐ',imgui.ImVec2(240,24)) then
+    if imgui.Button(u8'Основное',imgui.ImVec2(240,24)) then
         windows[0] = false
         blyat[0] = true
     end
-    if imgui.Button(u8'ГЃГЁГ­Г¤ГҐГ°',imgui.ImVec2(240,24)) then  
+    if imgui.Button(u8'Биндер',imgui.ImVec2(240,24)) then  
         windows[0] = false
         show_window[0] = true
 
     end
-    if imgui.Button(u8'ГЂГўГІГ®ГЃГЏ',imgui.ImVec2(240,24)) then  
+    if imgui.Button(u8'АвтоБП',imgui.ImVec2(240,24)) then  
         windows[0] = false
         xxx.bool[0] = true
 
     end
-    if imgui.Button(u8'ГЏГ®Г±ГІГ ГўГЄГЁ',imgui.ImVec2(240,24)) then
+    if imgui.Button(u8'Поставки',imgui.ImVec2(240,24)) then
         windows[0] = false
         her[0] = true
     end
-    if imgui.Button(u8'Г€Г­ГґГ®Г°Г¬Г Г¶ГЁГї',imgui.ImVec2(240,24)) then
+    if imgui.Button(u8'Информация',imgui.ImVec2(240,24)) then
         windows[0] = false
         pizda[0] = true
     end
     imgui.End()
 end)
 
-------------------------------ГЋГ‘ГЌГЋГ‚ГЌГЋГ…---------------------------------
+------------------------------ОСНОВНОЕ---------------------------------
 imgui.OnFrame(function() return blyat[0] end, function (player)
     imgui.SetNextWindowPos(imgui.ImVec2(500,500), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(245, 270), imgui.Cond.Always)
-    imgui.Begin(u8'ГЋГ±Г­Г®ГўГ­Г®ГҐ', blyat, imgui.WindowFlags.NoResize)
-    imgui.Text(u8'Г‚ГўГҐГ¤ГЁГІГҐ ГІГҐГЈ:')
+    imgui.Begin(u8'Основное', blyat, imgui.WindowFlags.NoResize)
+    imgui.Text(u8'Введите тег:')
     
     if imgui.InputText('##Add', inputt, 256) then
         settings.nigger.inputsaved = u8:decode(str(inputt)) 
         inicfg.save(settings, 'ArmyHelper.ini') 
     end
-    imgui.Text(u8'Г‚ГўГҐГ¤ГЁГІГҐ ГЄГ«ГЁГ±ГІ:')
+    imgui.Text(u8'Введите клист:')
     
     if imgui.InputText('##qwerty', cl, 256) then
         settings.nigger.clist = u8:decode(str(cl))
         inicfg.save(settings, 'ArmyHelper.ini')
     end
     
-    if imgui.Checkbox(u8'Г–ГўГҐГІГ­Г»ГҐ Г­ГЁГЄГЁ Гў Г·Г ГІГҐ', checkboxone) then
+    if imgui.Checkbox(u8'Цветные ники в чате', checkboxone) then
         settings.nigger.checkboxstatus = checkboxone[0] 
         inicfg.save(settings, 'ArmyHelper.ini')
     end
@@ -264,18 +264,18 @@ imgui.OnFrame(function() return blyat[0] end, function (player)
     imgui.TextDisabled("(?)")
     if imgui.IsItemHovered() then
         imgui.BeginTooltip()
-        imgui.Text(u8'ГЃГ«Г®ГЄГЁГ°ГіГҐГІ Г°ГҐГЄГ«Г Г¬Гі Гў Г·Г ГІГҐ')
+        imgui.Text(u8'Блокирует рекламу в чате')
         imgui.EndTooltip()
     end
-    if imgui.Checkbox(u8'ГЃГ«Г®ГЄГЁГ°Г®ГўГЄГ  ГЂГ¤Г¬ГЁГ­Г—Г ГІГ ', admin) then
+    if imgui.Checkbox(u8'Блокировка АдминЧата', admin) then
         settings.nigger.adminchat = admin[0] 
         inicfg.save(settings, 'ArmyHelper.ini')
     end
-    if imgui.Checkbox(u8'ГЃГ«Г®ГЄГЁГ°Г®ГўГЄГ  Г­Г®ГўГ®Г±ГІГҐГ©', qqq) then
+    if imgui.Checkbox(u8'Блокировка новостей', qqq) then
         settings.nigger.nov = qqq[0] 
         inicfg.save(settings, 'ArmyHelper.ini')
     end
-    if imgui.Button(u8'Г‚ГҐГ°Г­ГіГІГјГ±Гї Гў ГЈГ«Г ГўГ­Г®ГҐ Г¬ГҐГ­Гѕ',imgui.ImVec2(240,24)) then  
+    if imgui.Button(u8'Вернуться в главное меню',imgui.ImVec2(240,24)) then  
         windows[0] = true
         blyat[0] = false
 
@@ -286,13 +286,13 @@ imgui.OnFrame(function() return blyat[0] end, function (player)
 
 end)
 
------------------------------ГЂГ‚Г’ГЋГЃГЏ------------------------------------
+-----------------------------АВТОБП------------------------------------
 imgui.OnFrame(function() return xxx.bool[0] end, function()
     local screen = {getScreenResolution()}
     imgui.SetNextWindowPos(imgui.ImVec2(screen[1] / 2, screen[2] / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(250, 250), imgui.Cond.FirstUseEver)
-    imgui.Begin(u8"ГЂГўГІГ®ГЃГЏ", xxx.bool, imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoResize + imgui.WindowFlags.NoSavedSettings)
-    if imgui.Checkbox(u8"Г‚ГЄГ«ГѕГ·ГЁГІГј/ГўГ»ГЄГ«ГѕГ·ГЁГІГј", xxx.mainState) then
+    imgui.Begin(u8"АвтоБП", xxx.bool, imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoResize + imgui.WindowFlags.NoSavedSettings)
+    if imgui.Checkbox(u8"Включить/выключить", xxx.mainState) then
         setting.arm.mainState = xxx.mainState[0]
         json(path):save(setting)
      
@@ -326,7 +326,7 @@ imgui.OnFrame(function() return xxx.bool[0] end, function()
         setting.arm.parachute = xxx.parachute[0]
         json(path):save(setting)
     end
-    if imgui.Button(u8'Г‚ГҐГ°Г­ГіГІГјГ±Гї Гў ГЈГ«Г ГўГ­Г®ГҐ Г¬ГҐГ­Гѕ',imgui.ImVec2(240,24)) then  
+    if imgui.Button(u8'Вернуться в главное меню',imgui.ImVec2(240,24)) then  
         windows[0] = true
         xxx.bool[0] = false
 
@@ -335,13 +335,13 @@ imgui.OnFrame(function() return xxx.bool[0] end, function()
 end)
 
 
---------------------------ГЏГ®Г±ГІГ ГўГЄГЁ-------------------------------------
+--------------------------Поставки-------------------------------------
 imgui.OnFrame(function() return her[0] end, function (player)
     imgui.SetNextWindowPos(imgui.ImVec2(500,500), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(720, 250), imgui.Cond.Always)
-    imgui.Begin(u8'ГЏГ®Г±ГІГ ГўГЄГЁ', her, imgui.WindowFlags.NoResize)
+    imgui.Begin(u8'Поставки', her, imgui.WindowFlags.NoResize)
     
-    if imgui.Checkbox(u8'ГЂГўГІГ® /carm', autoCarm) then
+    if imgui.Checkbox(u8'Авто /carm', autoCarm) then
         settings.nigger.Carm = autoCarm[0] 
         inicfg.save(settings, 'ArmyHelper.ini')
     end
@@ -349,28 +349,28 @@ imgui.OnFrame(function() return her[0] end, function (player)
     imgui.TextDisabled("(?)")
     if imgui.IsItemHovered() then
         imgui.BeginTooltip()
-        imgui.Text(u8'ГЏГ°ГЁ ГЇГ®Г¤Г«ГҐГІГҐ ГЄ Г‹Г‚Г  ГЁ Г±ГіГµГ®ГЈГ°ГіГ§Гі Г ГўГІГ®Г¬Г ГІГЁГ·ГҐГ±ГЄГЁ ГўГўГ®Г¤ГЁГІ /carm')
+        imgui.Text(u8'При подлете к ЛВа и сухогрузу автоматически вводит /carm')
         imgui.EndTooltip()
     end
     imgui.Separator()
-    imgui.Text(u8("ГђГҐГ¤Г ГЄГІГЁГ°Г®ГўГ Г­ГЁГҐ Г¤Г®ГЄГ«Г Г¤Г®Гў:"))
-    if imgui.InputText(u8'ГЌГ Г·Г Г«Г® ГЇГ®Г±ГІГ ГўГ®ГЄ',dok1, 256) then
+    imgui.Text(u8("Редактирование докладов:"))
+    if imgui.InputText(u8'Начало поставок',dok1, 256) then
         settings.nigger.nach = u8:decode(str(dok1))
         inicfg.save(settings, 'ArmyHelper.ini')
     end
-    if imgui.InputText(u8'Г‡Г ГўГҐГ°ГёГҐГ­ГЁГҐ ГЇГ®Г±ГІГ ГўГ®ГЄ',dok2, 256) then
+    if imgui.InputText(u8'Завершение поставок',dok2, 256) then
         settings.nigger.zav = u8:decode(str(dok2))
         inicfg.save(settings, 'ArmyHelper.ini')
     end
-    if imgui.InputText(u8'Г‡Г ГЈГ°ГіГ§ГЄГ  Г­Г  Г±ГіГµГ®ГЈГ°ГіГ§ГҐ',dok3, 256) then
+    if imgui.InputText(u8'Загрузка на сухогрузе',dok3, 256) then
         settings.nigger.suhoi = u8:decode(str(dok3))
         inicfg.save(settings, 'ArmyHelper.ini')
     end
-    if imgui.InputText(u8'ГђГ Г§ГЈГ°ГіГ§ГЄГ  Г­Г  Г‹Г‚Г  (x/500 ГЇГЁГ±Г ГІГј Г­ГҐ Г­Г Г¤Г®)',dok4, 256) then
+    if imgui.InputText(u8'Разгрузка на ЛВа (x/500 писать не надо)',dok4, 256) then
         settings.nigger.raz = u8:decode(str(dok4))
         inicfg.save(settings, 'ArmyHelper.ini')
     end
-    if imgui.Button(u8'Г‚ГҐГ°Г­ГіГІГјГ±Гї Гў ГЈГ«Г ГўГ­Г®ГҐ Г¬ГҐГ­Гѕ',imgui.ImVec2(240,24)) then  
+    if imgui.Button(u8'Вернуться в главное меню',imgui.ImVec2(240,24)) then  
         windows[0] = true
         her[0] = false
 
@@ -386,49 +386,49 @@ end)
 
 
 
------------------------------Г€ГЌГ”ГЋГђГЊГЂГ–Г€Гџ----------------------------------
+-----------------------------ИНФОРМАЦИЯ----------------------------------
 imgui.OnFrame(function() return pizda[0] end, function (player)
     imgui.SetNextWindowPos(imgui.ImVec2(500,500), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(600, 400), imgui.Cond.Always)
-    imgui.Begin(u8'Г€Г­ГґГ®Г°Г¬Г Г¶ГЁГї', pizda, imgui.WindowFlags.NoResize)
+    imgui.Begin(u8'Информация', pizda, imgui.WindowFlags.NoResize)
     if imgui.BeginTabBar('Tabs') then 
-        if imgui.BeginTabItem(u8'ГЉГ«Г ГўГЁГёГЁ') then 
+        if imgui.BeginTabItem(u8'Клавиши') then 
             imgui.Columns(2) 
             imgui.Text(u8'L') imgui.SetColumnWidth(-1,80) 
             imgui.NextColumn()
-            imgui.Text(u8'ГЋГІГЇГ°Г ГўГ«ГїГҐГІ Гў Г·Г ГІ /lock') imgui.SetColumnWidth(-1, 400) 
+            imgui.Text(u8'Отправляет в чат /lock') imgui.SetColumnWidth(-1, 400) 
             imgui.Columns(1)
             imgui.Separator()
            
             imgui.Columns(2)
             imgui.Text(u8'F2') imgui.SetColumnWidth(-1, 80)
             imgui.NextColumn()
-            imgui.Text(u8'ГЊГҐГ­Гѕ Г¤Г®ГЄГ«Г Г¤Г®Гў') imgui.SetColumnWidth(-1, 400) 
+            imgui.Text(u8'Меню докладов') imgui.SetColumnWidth(-1, 400) 
             imgui.Columns(1)
             imgui.Separator()
 
             imgui.Columns(2)
             imgui.Text(u8'N') imgui.SetColumnWidth(-1, 80)
             imgui.NextColumn()
-            imgui.Text(u8'ГЊГҐГ­Гѕ ГЇГ®Г±ГІГ ГўГ®ГЄ(Г°Г ГЎГ®ГІГ ГҐГІ ГІГ®Г«ГјГЄГ® Гў Г¬Г ГІГ®Г«ГҐГІГҐ)') imgui.SetColumnWidth(-1, 400) 
+            imgui.Text(u8'Меню поставок(работает только в матолете)') imgui.SetColumnWidth(-1, 400) 
             imgui.Columns(1)
             imgui.Separator()
 
             imgui.Columns(2)
             imgui.Text(u8'B') imgui.SetColumnWidth(-1, 80)
             imgui.NextColumn()
-            imgui.Text(u8'ГЃГ»Г±ГІГ°Г»Г© /clist ') imgui.SetColumnWidth(-1, 400) 
+            imgui.Text(u8'Быстрый /clist ') imgui.SetColumnWidth(-1, 400) 
             imgui.Columns(1)
             imgui.Separator()
             imgui.EndTabItem() 
         end
         
     
-        if imgui.BeginTabItem(u8'ГЉГ®Г¬Г Г­Г¤Г»') then 
+        if imgui.BeginTabItem(u8'Команды') then 
             imgui.Columns(2) 
              imgui.Text(u8'/mask') imgui.SetColumnWidth(-1,80) 
              imgui.NextColumn()
-             imgui.Text(u8'ГЋГІГЇГ°Г ГўГ«ГїГҐГІ Гў Г·Г ГІ Г®ГІГ»ГЈГ°Г®ГўГЄГі Г¬Г Г±ГЄГЁ') imgui.SetColumnWidth(-1, 400) 
+             imgui.Text(u8'Отправляет в чат отыгровку маски') imgui.SetColumnWidth(-1, 400) 
              imgui.Columns(1)
              imgui.Separator() 
              imgui.EndTabItem() 
@@ -442,7 +442,7 @@ imgui.OnFrame(function() return pizda[0] end, function (player)
    
    
    
-    if imgui.Button(u8'Г‚ГҐГ°Г­ГіГІГјГ±Гї Гў ГЈГ«Г ГўГ­Г®ГҐ Г¬ГҐГ­Гѕ',imgui.ImVec2(240,24)) then  
+    if imgui.Button(u8'Вернуться в главное меню',imgui.ImVec2(240,24)) then  
         windows[0] = true
         pizda[0] = false
 
@@ -455,10 +455,10 @@ local ComboTest = new.int()
 local kol = new.int()
 local kod = new.int()
 local ppp = new.int()
-local item_list = {u8'ГЉГЏГЏ', u8'Г‹Г®Г¤Г®Г·Г­Г Гї', u8'Г’Г°Г ГЇ'} --  Г±ГЇГЁГ±Г®ГЄ
+local item_list = {u8'КПП', u8'Лодочная', u8'Трап'} --  список
 local kollist = {'1','2','3','4','5'}
-local kodlist = {u8'ГЉГ®Г¤ 1',u8'ГЉГ®Г¤ 2',u8'ГЉГ®Г¤ 2-1',u8'ГЉГ®Г¤ 3'}
-local prlist = {u8'10-100',u8'ГЏГ®ГЇГ®Г«Г­ГҐГ­ГЁГҐ ГЃГЏ',u8'ГЏГ®Г±ГІГ°Г®ГҐГ­ГЁГҐ', u8'ГЏГ°ГЁГЄГ Г§'}
+local kodlist = {u8'Код 1',u8'Код 2',u8'Код 2-1',u8'Код 3'}
+local prlist = {u8'10-100',u8'Пополнение БП',u8'Построение', u8'Приказ'}
 local ImItems = imgui.new['const char*'][#item_list](item_list)
 local list = imgui.new['const char*'][#kollist](kollist)
 local sost = imgui.new['const char*'][#kodlist](kodlist)
@@ -467,27 +467,27 @@ local pr = imgui.new['const char*'][#prlist](prlist)
 imgui.OnFrame(function() return qwerty[0] end, function (player)
     imgui.SetNextWindowPos(imgui.ImVec2(500,500), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(240, 240), imgui.Cond.Always)
-    imgui.Begin(u8'Г„Г®ГЄГ«Г Г¤Г»', qwerty, imgui.WindowFlags.NoResize)
-    imgui.Combo(u8'ГЏГ®Г±ГІ',ComboTest,ImItems, #item_list)
-    imgui.Combo(u8'Г‘Г®Г±ГІГ Гў',kol,list, #kollist)
-    imgui.Combo(u8'ГЉГ®Г¤',kod,sost, #kodlist)
-    imgui.Combo(u8'ГЏГ°ГЁГ·ГЁГ­Г ',ppp,pr, #prlist)
-    imgui.Text(u8'ГЉГ«Г ГўГЁГёГ  1 - Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ ')
-    imgui.Text(u8'ГЉГ«Г ГўГЁГёГ  2 - Г‘Г®Г±ГІГ®ГїГ­ГЁГҐ ГЇГ®Г±ГІГ  ')
-    imgui.Text(u8'ГЉГ«Г ГўГЁГёГ  3 - ГЏГ®ГЄГЁГ­ГіГ« ГЇГ®Г±ГІ ')
+    imgui.Begin(u8'Доклады', qwerty, imgui.WindowFlags.NoResize)
+    imgui.Combo(u8'Пост',ComboTest,ImItems, #item_list)
+    imgui.Combo(u8'Состав',kol,list, #kollist)
+    imgui.Combo(u8'Код',kod,sost, #kodlist)
+    imgui.Combo(u8'Причина',ppp,pr, #prlist)
+    imgui.Text(u8'Клавиша 1 - Заступил на пост ')
+    imgui.Text(u8'Клавиша 2 - Состояние поста ')
+    imgui.Text(u8'Клавиша 3 - Покинул пост ')
     imgui.End()
 end)
 
 imgui.OnFrame(function() return xxl[0] end, function (player)
     imgui.SetNextWindowPos(imgui.ImVec2(500,500), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(300, 100), imgui.Cond.Always)
-    imgui.Begin(u8'Г‘Г®Г±ГІГ®ГїГ­ГЁГҐ Г±ГЄГ«Г Г¤Г ', xxl, imgui.WindowFlags.NoResize)
-    imgui.Text(u8'Г‚ГўГҐГ¤ГЁГІГҐ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г¬Г ГІГҐГ°ГЁГ Г«Г®Гў Г­Г  Г±ГЄГ«Г Г¤ГҐ')
+    imgui.Begin(u8'Состояние склада', xxl, imgui.WindowFlags.NoResize)
+    imgui.Text(u8'Введите количество материалов на складе')
     if imgui.InputText('##FFF', sclad, 256) then
         settings.nigger.sost = u8:decode(str(sclad)) 
         inicfg.save(settings, 'ArmyHelper.ini')
     end
-    if imgui.Button(u8'ГЋГІГЇГ°Г ГўГЁГІГј Г¤Г®ГЄГ«Г Г¤') then
+    if imgui.Button(u8'Отправить доклад') then
         sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..'' ..settings.nigger.raz..'' ..settings.nigger.sost.. '/500')
        
     end
@@ -498,17 +498,17 @@ end)
 imgui.OnFrame(function() return jopa[0] end, function (player)
     imgui.SetNextWindowPos(imgui.ImVec2(500,500), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(256, 150), imgui.Cond.Always)
-    imgui.Begin(u8'ГЊГҐГ­Гѕ Г¤Г®ГЄГ«Г Г¤Г®Гў', jopa, imgui.WindowFlags.NoResize)
-    if imgui.Button(u8'ГЌГ Г·Г Г«Г® ГЇГ®Г±ГІГ ГўГ®ГЄ',imgui.ImVec2(240,24)) then
+    imgui.Begin(u8'Меню докладов', jopa, imgui.WindowFlags.NoResize)
+    if imgui.Button(u8'Начало поставок',imgui.ImVec2(240,24)) then
         sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ' ..settings.nigger.nach..'')
     end
-    if imgui.Button(u8'Г‡Г ГЈГ°ГіГ§ГЁГ«Г±Гї Г­Г  Г±ГіГµГ®ГЈГ°ГіГ§ГҐ',imgui.ImVec2(240,24)) then
+    if imgui.Button(u8'Загрузился на сухогрузе',imgui.ImVec2(240,24)) then
         sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ' ..settings.nigger.suhoi..'')
     end
-    if imgui.Button(u8'ГђГ Г§ГЈГ°ГіГ§ГЁГ«Г±Гї Г­Г  Г‹Г‚Г ',imgui.ImVec2(240,24)) then  
+    if imgui.Button(u8'Разгрузился на ЛВа',imgui.ImVec2(240,24)) then  
         xxl[0] = true
     end
-    if imgui.Button(u8'Г‡Г ГўГҐГ°ГёГ Гѕ ГЇГ®Г±ГІГ ГўГЄГЁ',imgui.ImVec2(240,24)) then  
+    if imgui.Button(u8'Завершаю поставки',imgui.ImVec2(240,24)) then  
         sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ' ..settings.nigger.zav..'')
     end
     imgui.End()
@@ -528,41 +528,41 @@ end
 
 
 function sampev.onServerMessage(color, text)
-    if text == " ГђГ ГЎГ®Г·ГЁГ© Г¤ГҐГ­Гј Г­Г Г·Г ГІ" and color == 1790050303  then
+    if text == " Рабочий день начат" and color == 1790050303  then
         lua_thread.create(function()
             wait(1500)
             sampSendChat('/'..settings.cmd.hahaha..' '..settings.nigger.clist..' ')
         end)
     end 
-    ----------------------------- ГЃГ‹ГЋГЉГ€ГђГЋГ‚Г™Г€ГЉ ГђГ…ГЉГ‹ГЂГЊГ› -----------------------------
-    if color == 14221567 and string.find (text,'ГЋГЎГєГїГўГ«ГҐГ­ГЁГҐ:',1,true) and block[0] then 
+    ----------------------------- БЛОКИРОВЩИК РЕКЛАМЫ -----------------------------
+    if color == 14221567 and string.find (text,'Объявление:',1,true) and block[0] then 
         return false
         end
-        if color == 14221567 and string.find (text,'ГђГҐГ¤Г ГЄГ¶ГЁГї News',1,true) and block[0] then 
+        if color == 14221567 and string.find (text,'Редакция News',1,true) and block[0] then 
         return false
         end
     
-    ---------------------------ГЃГ‹ГЋГЉГ€ГђГЋГ‚Г™Г€ГЉ ГЂГ„ГЊГ€ГЌГ—ГЂГ’ГЂ----------------------------
+    ---------------------------БЛОКИРОВЩИК АДМИНЧАТА----------------------------
     
-    if color == -10270721 and string.find (text,'ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°:',1,true) and admin[0] then 
+    if color == -10270721 and string.find (text,'Администратор:',1,true) and admin[0] then 
         return false
         end
-        if color == -10270721 and string.find (text,'ГЎГ Г­ Г·Г ГІГ ',1,true) and admin[0] then 
+        if color == -10270721 and string.find (text,'бан чата',1,true) and admin[0] then 
         return false
         end
     
 
- ------------------------ГЃГ«Г®ГЄГЁГ°Г®ГўГЄГ  Г­Г®ГўГ®Г±ГІГҐГ©--------------------------------------
-    if color == 641859327 and string.find (text,'[ГЌГ®ГўГ®Г±ГІГЁ]:',1,true) and qqq[0] then 
+ ------------------------Блокировка новостей--------------------------------------
+    if color == 641859327 and string.find (text,'[Новости]:',1,true) and qqq[0] then 
         return false
         end
-        if color == -1 and string.find (text,'-----------=== ГѓГ®Г±ГіГ¤Г Г°Г±ГІГўГҐГ­Г­Г»ГҐ ГЌГ®ГўГ®Г±ГІГЁ ===-----------',1,true) and qqq[0] then 
+        if color == -1 and string.find (text,'-----------=== Государственные Новости ===-----------',1,true) and qqq[0] then 
         return false
         end
-        if color == 641859327 and string.find (text,'ГЌГ®ГўГ®Г±ГІГЁ:',1,true) and qqq[0] then 
+        if color == 641859327 and string.find (text,'Новости:',1,true) and qqq[0] then 
         return false
         end
-   ----------------------------------Г–Г‚Г…Г’ГЌГ›Г… ГЌГ€ГЉГ€ Г‚ Г—ГЂГ’Г…-----------------------------
+   ----------------------------------ЦВЕТНЫЕ НИКИ В ЧАТЕ-----------------------------
     if text:find("%w+_%w+%[%d+%]%: .*") and checkboxone[0] then
         local nick = text:match("(%w+_%w+)%[%d+%]%:")
         local hexcolorchat = bit.tohex(bit.rshift(color, 8), 6)
@@ -932,10 +932,10 @@ imgui.OnFrame(function() return not isGamePaused() and show_window[0] end, funct
             imgui.CenterColumnText("#")
             imgui.NextColumn()
             imgui.VerticalSeparator()
-            imgui.CenterColumnText(u8"ГЉГ«Г ГўГЁГёГ ")
+            imgui.CenterColumnText(u8"Клавиша")
             imgui.NextColumn()
             imgui.VerticalSeparator()
-            imgui.CenterColumnText(u8"ГЌГ Г§ГўГ Г­ГЁГҐ ГЎГЁГ­Г¤Г ")
+            imgui.CenterColumnText(u8"Название бинда")
             imgui.NextColumn()
             imgui.Separator()
             for id, data in ipairs(hotkeys) do
@@ -945,20 +945,20 @@ imgui.OnFrame(function() return not isGamePaused() and show_window[0] end, funct
                     current_hotkey = id
                 end
                 imgui.NextColumn()
-                imgui.CenterColumnText(keyname:len() > 0 and keyname or u8"В—")
+                imgui.CenterColumnText(keyname:len() > 0 and keyname or u8"—")
                 imgui.NextColumn()
-                imgui.CenterColumnText(desc:len() > 0 and desc or u8"В—")
+                imgui.CenterColumnText(desc:len() > 0 and desc or u8"—")
                 imgui.NextColumn()
             end
         imgui.EndChild()
         imgui.SetCursorPosY(imgui.GetCursorPosY() + 5)
-        if imgui.Button(u8'Г‚ГҐГ°Г­ГіГІГјГ±Гї Гў ГЈГ«Г ГўГ­Г®ГҐ Г¬ГҐГ­Гѕ',imgui.ImVec2(200,24)) then  
+        if imgui.Button(u8'Вернуться в главное меню',imgui.ImVec2(200,24)) then  
             windows[0] = true
             show_window[0] = false
     
         end
         imgui.SameLine()
-        if imgui.Button(u8"Г‘Г®Г§Г¤Г ГІГј", imgui.ImVec2(120,24)) then
+        if imgui.Button(u8"Создать", imgui.ImVec2(120,24)) then
             table.insert(hotkeys, {keys = {}, content = "", description = ""})
 
             current_hotkey = #hotkeys
@@ -966,20 +966,20 @@ imgui.OnFrame(function() return not isGamePaused() and show_window[0] end, funct
             imgui.StrCopy(description_hotkey, hotkey.description)
             imgui.StrCopy(content_hotkey, hotkey.content)
             keys_hotkey.v = hotkey.keys
-            imgui.OpenPopup(u8"ГђГҐГ¤Г ГЄГІГ®Г°")
+            imgui.OpenPopup(u8"Редактор")
         end
         imgui.SameLine()
-        if imgui.Button(u8"ГђГҐГ¤Г ГЄГІГЁГ°Г®ГўГ ГІГј", imgui.ImVec2(120,24)) then
+        if imgui.Button(u8"Редактировать", imgui.ImVec2(120,24)) then
             if current_hotkey then
                 local hotkey = hotkeys[current_hotkey]
                 imgui.StrCopy(description_hotkey, hotkey.description)
                 imgui.StrCopy(content_hotkey, hotkey.content)
                 keys_hotkey.v = hotkey.keys
-                imgui.OpenPopup(u8"ГђГҐГ¤Г ГЄГІГ®Г°")
+                imgui.OpenPopup(u8"Редактор")
              end
         end
         imgui.SameLine()
-        if imgui.Button(u8"Г“Г¤Г Г«ГЁГІГј", imgui.ImVec2(120,24)) then
+        if imgui.Button(u8"Удалить", imgui.ImVec2(120,24)) then
             if current_hotkey then
                 local keycombo = hotkeys[current_hotkey].keys
                 if rkeys.isHotKeyDefined(keycombo) then
@@ -989,12 +989,12 @@ imgui.OnFrame(function() return not isGamePaused() and show_window[0] end, funct
                 current_hotkey = nil
              end
         end
-        if imgui.BeginPopupModal(u8"ГђГҐГ¤Г ГЄГІГ®Г°", nil, imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoResize + imgui.WindowFlags.NoMove) then
+        if imgui.BeginPopupModal(u8"Редактор", nil, imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoResize + imgui.WindowFlags.NoMove) then
             imgui.Columns(2, nil, false)
             imgui.SetColumnWidth(-1, 158)
-            imgui.Text(u8"ГЉГ«Г ГўГЁГёГ :")
+            imgui.Text(u8"Клавиша:")
             imgui.NextColumn()
-            imgui.Text(u8"ГЌГ Г§ГўГ Г­ГЁГҐ ГЎГЁГ­Г¤Г :")
+            imgui.Text(u8"Название бинда:")
             imgui.Columns()
             if imgui.HotKey("##keys", keys_hotkey, ImVec2(150, 20)) then
                 local hotkey = hotkeys[current_hotkey]
@@ -1008,12 +1008,12 @@ imgui.OnFrame(function() return not isGamePaused() and show_window[0] end, funct
             imgui.PushItemWidth(350)
             imgui.InputText("##description", description_hotkey, ffi.sizeof(description_hotkey) - 1)
             imgui.PopItemWidth()
-            imgui.Text(u8"Г’ГҐГЄГ±ГІ:")
+            imgui.Text(u8"Текст:")
             imgui.SameLine()
-            imgui.Text(u8"Г‡Г Г¤ГҐГ°Г¦ГЄГ  - <time>")
+            imgui.Text(u8"Задержка - <time>")
             imgui.InputTextMultiline("##content", content_hotkey, ffi.sizeof(content_hotkey) - 1, ImVec2(504, 150))
             imgui.SetCursorPosY(imgui.GetCursorPosY() + 5)
-            if imgui.Button(u8"Г‘Г®ГµГ°Г Г­ГЁГІГј", ImVec2(250, 20)) then
+            if imgui.Button(u8"Сохранить", ImVec2(250, 20)) then
                 local hotkey = hotkeys[current_hotkey]
                 if rkeys.isHotKeyDefined(hotkey.keys) then
                     rkeys.unRegisterHotKey(hotkey.keys)
@@ -1031,7 +1031,7 @@ imgui.OnFrame(function() return not isGamePaused() and show_window[0] end, funct
                 imgui.CloseCurrentPopup()
             end
             imgui.SameLine()
-            if imgui.Button(u8"Г‡Г ГЄГ°Г»ГІГј", ImVec2(250, 20)) then
+            if imgui.Button(u8"Закрыть", ImVec2(250, 20)) then
                 imgui.CloseCurrentPopup()
             end
             imgui.EndPopup()
@@ -1040,15 +1040,26 @@ imgui.OnFrame(function() return not isGamePaused() and show_window[0] end, funct
 end)
 
 
-local kvl = {"ГЂ", "ГЃ", "Г‚", "Гѓ", "Г„", "Г†", "Г‡", "Г€", "ГЉ", "Г‹", "ГЊ", "ГЌ", "ГЋ", "ГЏ", "Гђ", "Г‘", "Г’", "Г“", "Г”", "Г•", "Г–", "Г—", "Г", "Гџ"}
-local KV = "Гѓ-11"
+local kvl = {"А", "Б", "В", "Г", "Д", "Ж", "З", "И", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Я"}
+local KV = "Г-11"
 function main()
-    while not isSampAvailable() do wait(10000) end
-    sampAddChatMessage('ArmyHelper: ГѓГ®ГІГ®Гў ГЄ Г°Г ГЎГ®ГІГҐ. ГЂГЄГІГЁГўГ Г¶ГЁГї: /ah fffffffff', 0xFFFFFFF )
+    if not isSampfuncsLoaded() or not isSampLoaded() then
+        return
+    end
+    while not isSampAvailable() do
+        wait(100)
+    end
     
-     if autoupdate_loaded and enable_autoupdate and Update then
+    
+    if autoupdate_loaded and enable_autoupdate and Update then
         pcall(Update.check, Update.json_url, Update.prefix, Update.url)
     end
+
+
+
+    sampAddChatMessage('ArmyHelper: Готов к работе. Активация: /ah fffffffff', 0xFFFFFFF )
+    
+
     
     
    
@@ -1090,7 +1101,7 @@ function main()
     sampRegisterChatCommand('mask', function(text) sampSendChat('/clist 32') 
         lua_thread.create(function()
         wait(1000)
-        sampSendChat('/do ГЌГ  Г«ГЁГ¶ГҐ Г¬Г Г±ГЄГ . ГЋГЇГ®Г§Г­Г ГўГ ГІГҐГ«ГјГ­Г»ГҐ Г§Г­Г ГЄГЁ Г®ГІГ±ГіГІГ±ГІГўГіГѕГІ. Г‹ГЁГ·Г­Г®Г±ГІГј Г®ГЇГ®Г§Г­Г ГІГј Г­ГҐГўГ®Г§Г¬Г®Г¦Г­Г®.')
+        sampSendChat('/do На лице маска. Опознавательные знаки отсутствуют. Личность опознать невозможно.')
         end) end )
 
        
@@ -1119,10 +1130,10 @@ function main()
             if lva > 200 and lva < 203  then carmResponse = 2 end
 
   
-        if isCharInAnyCar(PLAYER_PED) then -- ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г  ГІГ°Г Г­Г±ГЇГ®Г°ГІ
-            local carhandle = storeCarCharIsInNoSave(PLAYER_PED) -- ГЏГ®Г«ГіГ·ГҐГ­ГЁГї handle ГІГ°Г Г­Г±ГЇГ®Г°ГІГ 
-            local idcar = getCarModel(carhandle) -- ГЏГ®Г«ГіГ·ГҐГ­ГЁГҐ ID ГІГ°Г Г­Г±ГЇГ®Г°ГІГ 
-            print(idcar) -- Г‚Г»ГўГ®Г¤ГЁГ¬ ID ГІГ°Г Г­Г±ГЇГ®Г°ГІГ  Гў ГЄГ®Г­Г±Г®Г«Гј Sampfuncs.
+        if isCharInAnyCar(PLAYER_PED) then -- Проверка на транспорт
+            local carhandle = storeCarCharIsInNoSave(PLAYER_PED) -- Получения handle транспорта
+            local idcar = getCarModel(carhandle) -- Получение ID транспорта
+            print(idcar) -- Выводим ID транспорта в консоль Sampfuncs.
             if idcar == 548 and wasKeyPressed(VK_2)  then 
                
                 printStringNow('Press N', 10000)
@@ -1148,162 +1159,162 @@ function main()
     if wasKeyPressed(VK_F2) and not sampIsCursorActive() then qwerty[0] = not qwerty[0] end
     
 
-    if wasKeyPressed(VK_1) and qwerty[0] then -- Г§Г Г±ГІГіГЇГ«ГҐГ­ГЁГҐ Г­Г  ГЇГ®Г±ГІ
-        if ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 0 then -- ГЉГЏГЏ
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-1')
+    if wasKeyPressed(VK_1) and qwerty[0] then -- заступление на пост
+        if ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 0 then -- КПП
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:1. Код-1')
         elseif ComboTest[0] == 0 and kol[0] == 1 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:2. Код-1')
         elseif ComboTest[0] == 0 and kol[0] == 2 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:3. Код-1')
         elseif ComboTest[0] == 0 and kol[0] == 3 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:4. Код-1')
         elseif ComboTest[0] == 0 and kol[0] == 4 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:5. Код-1')
         
 
         elseif ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:1. Код-2')
         elseif ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:1. Код-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:1. Код-3')
         
         elseif ComboTest[0] == 0 and kol[0] == 1 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:2. Код-2')
         elseif ComboTest[0] == 0 and kol[0] == 1 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:2. Код-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 1 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:2. Код-3')
 
         elseif ComboTest[0] == 0 and kol[0] == 2 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:3. Код-2')
         elseif ComboTest[0] == 0 and kol[0] == 2 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:3. Код-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 2 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-3')  
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:3. Код-3')  
 
 
         elseif ComboTest[0] == 0 and kol[0] == 3 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:4. Код-2')
         elseif ComboTest[0] == 0 and kol[0] == 3 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:4. Код-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 3 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:4. Код-3')
 
 
         elseif ComboTest[0] == 0 and kol[0] == 4 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:5. Код-2')
         elseif ComboTest[0] == 0 and kol[0] == 4 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:5. Код-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 4 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:КПП. Состав:5. Код-3')
         
         
 
 
 
 
-        elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 0 then -- Г‹ГЋГ„ГЋГ—ГЌГЂГџ
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-1')
+        elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 0 then -- ЛОДОЧНАЯ
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:1. Код-1')
         elseif ComboTest[0] == 1 and kol[0] == 1 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:2. Код-1')
         elseif ComboTest[0] == 1 and kol[0] == 2 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:3. Код-1')
         elseif ComboTest[0] == 1 and kol[0] == 3 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:4. Код-1')
         elseif ComboTest[0] == 1 and kol[0] == 4 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:5. Код-1')
         
 
         elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:1. Код-2')
         elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:1. Код-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:1. Код-3')
         
         elseif ComboTest[0] == 1 and kol[0] == 1 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:2. Код-2')
         elseif ComboTest[0] == 1 and kol[0] == 1 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:2. Код-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 1 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:2. Код-3')
 
         elseif ComboTest[0] == 1 and kol[0] == 2 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:3. Код-2')
         elseif ComboTest[0] == 1 and kol[0] == 2 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:3. Код-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 2 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-3')  
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:3. Код-3')  
 
 
         elseif ComboTest[0] == 1 and kol[0] == 3 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:4. Код-2')
         elseif ComboTest[0] == 1 and kol[0] == 3 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:4. Код-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 3 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:4. Код-3')
 
 
         elseif ComboTest[0] == 1 and kol[0] == 4 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:5. Код-2')
         elseif ComboTest[0] == 1 and kol[0] == 4 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:5. Код-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 4 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Лодочная. Состав:5. Код-3')
         
         
 
 
 
-        elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 0 then -- Г’Г°Г ГЇ
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-1')
+        elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 0 then -- Трап
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:1. Код-1')
         elseif ComboTest[0] == 2 and kol[0] == 1 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:2. Код-1')
         elseif ComboTest[0] == 2 and kol[0] == 2 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:3. Код-1')
         elseif ComboTest[0] == 2 and kol[0] == 3 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:4. Код-1')
         elseif ComboTest[0] == 2 and kol[0] == 4 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:5. Код-1')
         
 
         elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:1. Код-2')
         elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:1. Код-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:1. Код-3')
         
         elseif ComboTest[0] == 2 and kol[0] == 1 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:2. Код-2')
         elseif ComboTest[0] == 2 and kol[0] == 1 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:2. Код-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 1 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:2. Код-3')
 
         elseif ComboTest[0] == 2 and kol[0] == 2 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:3. Код-2')
         elseif ComboTest[0] == 2 and kol[0] == 2 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:3. Код-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 2 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-3')  
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:3. Код-3')  
 
 
         elseif ComboTest[0] == 2 and kol[0] == 3 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:4. Код-2')
         elseif ComboTest[0] == 2 and kol[0] == 3 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:4. Код-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 3 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:4. Код-3')
 
 
         elseif ComboTest[0] == 2 and kol[0] == 4 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:5. Код-2')
         elseif ComboTest[0] == 2 and kol[0] == 4 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:5. Код-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 4 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Г‡Г Г±ГІГіГЇГЁГ« Г­Г  ГЇГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Заступил на пост:Трап. Состав:5. Код-3')
         end
     end
    
@@ -1316,192 +1327,192 @@ function main()
    
    
    
-    if wasKeyPressed(VK_2) and qwerty[0] then -- CГ®Г±ГІГ®ГїГ­ГЁГҐ ГЇГ®Г±ГІГ 
-        if ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 0 then -- ГЉГЏГЏ
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-1')
+    if wasKeyPressed(VK_2) and qwerty[0] then -- Cостояние поста
+        if ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 0 then -- КПП
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:1. Код-1')
         elseif ComboTest[0] == 0 and kol[0] == 1 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:2. Код-1')
         elseif ComboTest[0] == 0 and kol[0] == 2 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:3. Код-1')
         elseif ComboTest[0] == 0 and kol[0] == 3 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:4. Код-1')
         elseif ComboTest[0] == 0 and kol[0] == 4 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:5. Код-1')
         
 
         elseif ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:1. Код-2')
         elseif ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:1. Код-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 0 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:1. Код-3')
         
         elseif ComboTest[0] == 0 and kol[0] == 1 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:2. Код-2')
         elseif ComboTest[0] == 0 and kol[0] == 1 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:2. Код-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 1 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:2. Код-3')
 
         elseif ComboTest[0] == 0 and kol[0] == 2 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:3. Код-2')
         elseif ComboTest[0] == 0 and kol[0] == 2 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:3. Код-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 2 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-3')  
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:3. Код-3')  
 
 
         elseif ComboTest[0] == 0 and kol[0] == 3 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:4. Код-2')
         elseif ComboTest[0] == 0 and kol[0] == 3 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:4. Код-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 3 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:4. Код-3')
 
 
         elseif ComboTest[0] == 0 and kol[0] == 4 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:5. Код-2')
         elseif ComboTest[0] == 0 and kol[0] == 4 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:5. Код-2-1')
         elseif ComboTest[0] == 0 and kol[0] == 4 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:ГЉГЏГЏ. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:КПП. Состав:5. Код-3')
         
         
 
 
 
 
-        elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 0 then -- Г‹ГЋГ„ГЋГ—ГЌГЂГџ
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-1')
+        elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 0 then -- ЛОДОЧНАЯ
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:1. Код-1')
         elseif ComboTest[0] == 1 and kol[0] == 1 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:2. Код-1')
         elseif ComboTest[0] == 1 and kol[0] == 2 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:3. Код-1')
         elseif ComboTest[0] == 1 and kol[0] == 3 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:4. Код-1')
         elseif ComboTest[0] == 1 and kol[0] == 4 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:5. Код-1')
         
 
         elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:1. Код-2')
         elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:1. Код-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 0 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:1. Код-3')
         
         elseif ComboTest[0] == 1 and kol[0] == 1 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:2. Код-2')
         elseif ComboTest[0] == 1 and kol[0] == 1 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:2. Код-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 1 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:2. Код-3')
 
         elseif ComboTest[0] == 1 and kol[0] == 2 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:3. Код-2')
         elseif ComboTest[0] == 1 and kol[0] == 2 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:3. Код-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 2 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-3')  
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:3. Код-3')  
 
 
         elseif ComboTest[0] == 1 and kol[0] == 3 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:4. Код-2')
         elseif ComboTest[0] == 1 and kol[0] == 3 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:4. Код-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 3 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:4. Код-3')
 
 
         elseif ComboTest[0] == 1 and kol[0] == 4 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:5. Код-2')
         elseif ComboTest[0] == 1 and kol[0] == 4 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:5. Код-2-1')
         elseif ComboTest[0] == 1 and kol[0] == 4 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Лодочная. Состав:5. Код-3')
         
         
 
 
 
-        elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 0 then -- Г’Г°Г ГЇ
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-1')
+        elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 0 then -- Трап
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:1. Код-1')
         elseif ComboTest[0] == 2 and kol[0] == 1 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:2. Код-1')
         elseif ComboTest[0] == 2 and kol[0] == 2 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:3. Код-1')
         elseif ComboTest[0] == 2 and kol[0] == 3 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:4. Код-1')
         elseif ComboTest[0] == 2 and kol[0] == 4 and kod[0] == 0 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:5. Код-1')
         
 
         elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:1. Код-2')
         elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:1. Код-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 0 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:1. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:1. Код-3')
         
         elseif ComboTest[0] == 2 and kol[0] == 1 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:2. Код-2')
         elseif ComboTest[0] == 2 and kol[0] == 1 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:2. Код-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 1 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:2. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:2. Код-3')
 
         elseif ComboTest[0] == 2 and kol[0] == 2 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:3. Код-2')
         elseif ComboTest[0] == 2 and kol[0] == 2 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:3. Код-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 2 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:3. ГЉГ®Г¤-3')  
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:3. Код-3')  
 
 
         elseif ComboTest[0] == 2 and kol[0] == 3 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:4. Код-2')
         elseif ComboTest[0] == 2 and kol[0] == 3 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:4. Код-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 3 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:4. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:4. Код-3')
 
 
         elseif ComboTest[0] == 2 and kol[0] == 4 and kod[0] == 1 then 
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-2')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:5. Код-2')
         elseif ComboTest[0] == 2 and kol[0] == 4 and kod[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-2-1')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:5. Код-2-1')
         elseif ComboTest[0] == 2 and kol[0] == 4 and kod[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®Г±ГІ:Г’Г°Г ГЇ. Г‘Г®Г±ГІГ Гў:5. ГЉГ®Г¤-3')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Пост:Трап. Состав:5. Код-3')
         end
     end
 
-    if wasKeyPressed(VK_3) and qwerty[0] then -- ГЏГ®ГЄГЁГ­ГіГ« ГЇГ®Г±ГІ
-        if ComboTest[0] == 0 and ppp[0] == 0 then -- ГЉГЏГЏ
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®ГЄГЁГ­ГіГ« ГЇГ®Г±ГІ:ГЉГЏГЏ. ГЏГ°ГЁГ·ГЁГ­Г :10-100')
+    if wasKeyPressed(VK_3) and qwerty[0] then -- Покинул пост
+        if ComboTest[0] == 0 and ppp[0] == 0 then -- КПП
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Покинул пост:КПП. Причина:10-100')
         elseif ComboTest[0] == 0 and ppp[0] == 1 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®ГЄГЁГ­ГіГ« ГЇГ®Г±ГІ:ГЉГЏГЏ. ГЏГ°ГЁГ·ГЁГ­Г :ГЏГ®ГЇГ®Г«Г­ГҐГ­ГЁГҐ ГЃГЏ')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Покинул пост:КПП. Причина:Пополнение БП')
         elseif ComboTest[0] == 0 and ppp[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®ГЄГЁГ­ГіГ« ГЇГ®Г±ГІ:ГЉГЏГЏ. ГЏГ°ГЁГ·ГЁГ­Г :ГЏГ®Г±ГІГ°Г®ГҐГ­ГЁГҐ')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Покинул пост:КПП. Причина:Построение')
         elseif ComboTest[0] == 0 and ppp[0] == 03 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®ГЄГЁГ­ГіГ« ГЇГ®Г±ГІ:ГЉГЏГЏ. ГЏГ°ГЁГ·ГЁГ­Г :ГЏГ°ГЁГЄГ Г§')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Покинул пост:КПП. Причина:Приказ')
        
-        elseif ComboTest[0] == 1 and ppp[0] == 0 then -- Г‹Г®Г¤Г®Г·Г­Г Гї
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®ГЄГЁГ­ГіГ« ГЇГ®Г±ГІ:Г‹Г Г¤Г®Г·Г­Г Гї. ГЏГ°ГЁГ·ГЁГ­Г :10-100')
+        elseif ComboTest[0] == 1 and ppp[0] == 0 then -- Лодочная
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Покинул пост:Ладочная. Причина:10-100')
         elseif ComboTest[0] == 1 and ppp[0] == 1 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®ГЄГЁГ­ГіГ« ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. ГЏГ°ГЁГ·ГЁГ­Г :ГЏГ®ГЇГ®Г«Г­ГҐГ­ГЁГҐ ГЃГЏ')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Покинул пост:Лодочная. Причина:Пополнение БП')
         elseif ComboTest[0] == 1 and ppp[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®ГЄГЁГ­ГіГ« ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. ГЏГ°ГЁГ·ГЁГ­Г :ГЏГ®Г±ГІГ°Г®ГҐГ­ГЁГҐ')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Покинул пост:Лодочная. Причина:Построение')
         elseif ComboTest[0] == 1 and ppp[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®ГЄГЁГ­ГіГ« ГЇГ®Г±ГІ:Г‹Г®Г¤Г®Г·Г­Г Гї. ГЏГ°ГЁГ·ГЁГ­Г :ГЏГ°ГЁГЄГ Г§')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Покинул пост:Лодочная. Причина:Приказ')
 
-             elseif ComboTest[0] == 2 and ppp[0] == 0 then -- Г’Г°Г ГЇ
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®ГЄГЁГ­ГіГ« ГЇГ®Г±ГІ:Г’Г°Г ГЇ. ГЏГ°ГЁГ·ГЁГ­Г :10-100')
+             elseif ComboTest[0] == 2 and ppp[0] == 0 then -- Трап
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Покинул пост:Трап. Причина:10-100')
         elseif ComboTest[0] == 2 and ppp[0] == 1 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®ГЄГЁГ­ГіГ« ГЇГ®Г±ГІ:Г’Г°Г ГЇ. ГЏГ°ГЁГ·ГЁГ­Г :ГЏГ®ГЇГ®Г«Г­ГҐГ­ГЁГҐ ГЃГЏ')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Покинул пост:Трап. Причина:Пополнение БП')
         elseif ComboTest[0] == 2 and ppp[0] == 2 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®ГЄГЁГ­ГіГ« ГЇГ®Г±ГІ:Г’Г°Г ГЇ. ГЏГ°ГЁГ·ГЁГ­Г :ГЏГ®Г±ГІГ°Г®ГҐГ­ГЁГҐ')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Покинул пост:Трап. Причина:Построение')
         elseif ComboTest[0] == 2 and ppp[0] == 3 then
-            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' ГЏГ®ГЄГЁГ­ГіГ« ГЇГ®Г±ГІ:Г’Г°Г ГЇ. ГЏГ°ГЁГ·ГЁГ­Г :ГЏГ°ГЁГЄГ Г§')
+            sampSendChat('/'..settings.cmd.hyi..' '..settings.nigger.inputsaved..' Покинул пост:Трап. Причина:Приказ')
         end
     end
 
@@ -1517,7 +1528,7 @@ end
 
 
 sampev.onShowDialog = function(dId, style, title, button1, button2, text)
-    if title:find("Г‘ГЄГ«Г Г¤%sГ®Г°ГіГ¦ГЁГї") and setting.arm.mainState then
+    if title:find("Склад%sоружия") and setting.arm.mainState then
         if setting.arm.desertEagle and getAmmo(24) < 63 then
             sampSendDialogResponse(dId, 1, 0, "")
         elseif setting.arm.shotgun and getAmmo(25) < 30 then
@@ -1535,12 +1546,12 @@ sampev.onShowDialog = function(dId, style, title, button1, button2, text)
         end
         return false
     end
-    if title:find("ГђГ Г§Г¤ГҐГўГ Г«ГЄГ ") then
-        sampSendDialogResponse(dId, 1, 0, 'Г„Г ')
+    if title:find("Раздевалка") then
+        sampSendDialogResponse(dId, 1, 0, 'Да')
         return false
     end
    
-    if title:find("ГђГ Г§ГўГ®Г§ГЄГ  Г¬Г ГІГҐГ°ГЁГ Г«Г®Гў") and autoCarm[0] then
+    if title:find("Развозка материалов") and autoCarm[0] then
     
         if carmResponse == 0 and autoCarm[0] then sampSendDialogResponse(dId, 1, 0) return false end
         if carmResponse == 2 and autoCarm[0] then sampSendDialogResponse(dId, 1, 2) return false end
@@ -1562,7 +1573,7 @@ function SE.onSendChat(text)
         if KV~=nil then
             text = text:gsub("#kv#", KV)
         else
-            sampAddChatMessage(" Г‚Г» ГўГ­ГҐ ГЄГ Г°ГІГ».", 0xFF0000)  
+            sampAddChatMessage(" Вы вне карты.", 0xFF0000)  
             return false
         end
     end
@@ -1579,7 +1590,7 @@ function SE.onSendCommand(text)
           if KV~=nil then
               text = text:gsub("#kv#", KV)
           else
-              sampAddChatMessage(" Г‚Г» ГўГ­ГҐ ГЄГ Г°ГІГ».", 0xFF0000)  
+              sampAddChatMessage(" Вы вне карты.", 0xFF0000)  
               return false
           end
       end
