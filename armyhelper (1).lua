@@ -1030,7 +1030,7 @@ end)
 local kvl = {"À", "Á", "Â", "Ã", "Ä", "Æ", "Ç", "È", "Ê", "Ë", "Ì", "Í", "Î", "Ï", "Ð", "Ñ", "Ò", "Ó", "Ô", "Õ", "Ö", "×", "Ø", "ß"}
 local KV = "Ã-11"
 function main()
-    autoupdate("https://raw.githubusercontent.com/coulanderson/Army/main/up.json", '['..string.upper(thisScript().name)..']: ', "https://raw.githubusercontent.com/coulanderson/Army/main/up.json")
+   
     if not isSampfuncsLoaded() or not isSampLoaded() then
         return
     end
@@ -1038,7 +1038,7 @@ function main()
         wait(100)
     end
     
-    
+    autoupdate("https://raw.githubusercontent.com/coulanderson/Army/main/up.json", '['..string.upper(thisScript().name)..']: ', "https://raw.githubusercontent.com/coulanderson/Army/main/up.json")
     
 
 
