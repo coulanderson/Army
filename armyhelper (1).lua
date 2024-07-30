@@ -2,7 +2,7 @@ require("samp-api")
 require("moonloader")
 
 script_name('ArmyHelper')
-script_version("32.07.2024")
+script_version("31.07.2024")
 
 
 
