@@ -19,7 +19,7 @@ if enable_autoupdate then
     if updater_loaded then
         autoupdate_loaded, Update = pcall(Updater)
         if autoupdate_loaded then
-            Update.json_url = "https://raw.githubusercontent.com/coulanderson/Army/main/up.json" .. tostring(os.clock())
+            Update.json_url = "https://raw.githubusercontent.com/coulanderson/Army/main/up.json?" .. tostring(os.clock())
             Update.prefix = "[" .. string.upper(thisScript().name) .. "]: "
             Update.url = "https://raw.githubusercontent.com/coulanderson/Army/main/up.json"
         end
@@ -1057,7 +1057,7 @@ function main()
     
 
 
-    sampAddChatMessage('ArmyHelper: Ãîòîâ ê ðàáîòå. Àêòèâàöèÿ: /ah ffsssssssssssssssf', 0xFFFFFFF )
+    sampAddChatMessage('ArmyHelper: Ãîòîâ ê ðàáîòå. Àêòèâàöèÿ: /ah ffffffffffff', 0xFFFFFFF )
     
 
     
